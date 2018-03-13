@@ -1,6 +1,58 @@
+html,
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
 body {
   background: #000;
   color: greenyellow;
   font-family: "Ubuntu Monospace", "Consolas", Courier, monospace;
   font-size: 11pt;
+}
+
+.main {
+  margin: 0 auto;
+  max-width: 1000px;
+  min-height: 100%;
+  border-left: 1px solid greenyellow;
+  border-right: 1px solid greenyellow;
+  padding: 20px;
+}
+
+.blog-post p {
+  line-height: 1.5em;
+}
+
+@media (max-width: 500px) {
+  .blog-post p {
+    text-align: left;
+  }
+} 
+
+@media screen and (min-width: 500px) {
+  .blog-post p {
+    text-align: justify;
+    text-justify: newspaper;
+  }
+}
+
+.blog-post + .blog-post {
+  border-top: 1px solid greenyellow;
+  padding-top: 20px;
+}
+
+.blog-post h1 {
+  margin: 0;
+}
+
+.blog-post a {
+  color: greenyellow;
+  word-break: break-all;
+}
+
+.blog-post a:hover {
+  color: white;
 }
