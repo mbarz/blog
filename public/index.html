@@ -28,6 +28,17 @@
                 <a href="https://futter.muxe.de">https://futter.muxe.de</a> fehlt leider noch, weil ich hier noch mit einer Strato-Umleitung arbeite und die
                 domain nicht uberspace hinzugefügt habe.
             </p>
+            <p>
+                Nachdem ich schon https laufen habe, sollte ich meine Besucher auch dazu bewegen https zu verwenden. Um das zu erwirken,
+                hilft wieder einmal die Dokumentation auf uberspace
+                <a href="https://wiki.uberspace.de/webserver:htaccess">https://wiki.uberspace.de/webserver:htaccess</a>, denn alles was man braucht, ist eine entsprechend konfigurierte
+                .htaccess Datei.
+                <pre>#.htaccess
+RewriteEngine on
+RewriteCond %{HTTPS} !=on
+RewriteCond %{ENV:HTTPS} !=on
+RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]</pre>
+            </p>
             <h2>für morgen schon vorbereitet: deploy mit git</h2>
             <p>Morgen werde ich hier wahrscheinlich ein bisschen über das deployment dieses Blogs schreiben. Sehr kurz, sehr
                 knapp. Trotzdem zu viel für heute.</p>

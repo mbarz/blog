@@ -30,7 +30,7 @@ body {
   .blog-post p {
     text-align: left;
   }
-} 
+}
 
 @media screen and (min-width: 500px) {
   .blog-post p {
@@ -55,4 +55,9 @@ body {
 
 .blog-post a:hover {
   color: white;
+}
+
+.blog-post pre {
+  background: rgb(0, 20, 0);
+  padding: 10px;
 }
