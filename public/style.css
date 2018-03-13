@@ -60,5 +60,5 @@ body {
 .blog-post pre {
   background: rgb(0, 20, 0);
   padding: 10px;
-  overflow: scroll;
+  overflow: auto;
 }
