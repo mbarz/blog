@@ -3,53 +3,53 @@
 <html>
 
 <head>
-<meta charset="UTF-8">
-<title>muxes blog</title>
+    <meta charset="UTF-8">
+    <title>muxes blog</title>
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-<h1>dev blog #0001 2018-03-12</h1>
-<p>
-Hallo. Dies ist der erneute Versuch eines Blogs. Fokus soll dieses mal auf der Softwareentwicklung liegen.
-Ich will hier einige Sachen aus meinem Entwickleralltag reflektieren. Weiterhin soll der Blog mich selbst
-dazu anregen, verschiedene Webtechnologien auszutesten und vor allem für mich selbst meine Erfahrungen damit
-in irgendeiner Form zu dokumentieren
-</p>
-<h2>Erstellen einer Subdomain für diesen Blog</h2>
-<p>
-Als kleinen einfachen Start, beginne ich heute in diesem Blog mit der Einrichtung des selben in kleinen Schritten.
-Als erstes braucht der Blog eine einfach erreichbare Seite. Meine Webseite ist muxe.de, also ist die subdomain
-blog.muxe.de ja irgendwie naheliegend. Derzeit verwende ich strato als Domain-Provider und uberspace.de
-um dort all meine Dateien hochzuladen und verfügbar zu machen.
-</p>
-<p>
-Mit uberspace ist es sehr einfach neue Subdomains zu den bestehenden Domains hinzuzufügen.
-<ul>
-<li>https://wiki.uberspace.de/domain:verwalten#domains_verbinden</li>
-<li>https://wiki.uberspace.de/domain:subdomain?s[]=subdomains</li>
-</ul>
-Es musste lediglich ein Befehl eingetragen werden, der eine A/AAAA Konfiguration ausspuckt, die dann bei
-Strato eingegeben werden muss. Ein paar Minuten warten und die Subdomain zeigt auf meine Daten bei uberspace.de.
-Dann noch einen Order/Symlink für die Subdomain anlegen, damit nicht muxe.de selbst angezeigt, wird sondern das,
-was auch immer ich als Blog hochlade und dann noch die Seite selbst
-</p>
-<h2>Klein anfangen</h2>
-<p>
-Jetzt fehlt also nur die Seite selbst. Ich könnte jetzt hier einfach ein wordpress hochladen und konfigurieren,
-das wäre aber zu einfach. Ich will alles selbst machen und auf dem Weg dabei einige Sachen ausprobieren, die ich
-schon im Hinterkopf habe. Aber nicht heute. Heute wird es einfach nur das in der Kommandozeile via nano Editor
-eingetippte HTML-Dokument. Keine Logik, kein CSS, gar nichts.
-</p>
-<h2>What to expect next</h2>
-<p>
-Für die nächsten Tage habe ich mir schon ein paar Features vorgenommen:
-<ul>
-<li>https</li>
-<li>deploy via git</li>
-<li>Blogbeiträge mit Markdown</li>
-<li>...</li
-</ul>
-</p>
+    <h1>dev blog #0001 2018-03-12</h1>
+    <p>
+        Hallo. Dies ist der erneute Versuch eines Blogs. Fokus soll dieses mal auf der Softwareentwicklung liegen. Ich will hier
+        einige Sachen aus meinem Entwickleralltag reflektieren. Weiterhin soll der Blog mich selbst dazu anregen, verschiedene
+        Webtechnologien auszutesten und vor allem für mich selbst meine Erfahrungen damit in irgendeiner Form zu dokumentieren
+    </p>
+    <h2>Erstellen einer Subdomain für diesen Blog</h2>
+    <p>
+        Als kleinen einfachen Start, beginne ich heute in diesem Blog mit der Einrichtung des selben in kleinen Schritten. Als erstes
+        braucht der Blog eine einfach erreichbare Seite. Meine Webseite ist muxe.de, also ist die subdomain blog.muxe.de
+        ja irgendwie naheliegend. Derzeit verwende ich strato als Domain-Provider und uberspace.de um dort all meine Dateien
+        hochzuladen und verfügbar zu machen.
+    </p>
+    <p>
+        Mit uberspace ist es sehr einfach neue Subdomains zu den bestehenden Domains hinzuzufügen.
+        <ul>
+            <li>https://wiki.uberspace.de/domain:verwalten#domains_verbinden</li>
+            <li>https://wiki.uberspace.de/domain:subdomain?s[]=subdomains</li>
+        </ul>
+        Es musste lediglich ein Befehl eingetragen werden, der eine A/AAAA Konfiguration ausspuckt, die dann bei Strato eingegeben
+        werden muss. Ein paar Minuten warten und die Subdomain zeigt auf meine Daten bei uberspace.de. Dann noch einen Order/Symlink
+        für die Subdomain anlegen, damit nicht muxe.de selbst angezeigt, wird sondern das, was auch immer ich als Blog hochlade
+        und dann noch die Seite selbst
+    </p>
+    <h2>Klein anfangen</h2>
+    <p>
+        Jetzt fehlt also nur die Seite selbst. Ich könnte jetzt hier einfach ein wordpress hochladen und konfigurieren, das wäre
+        aber zu einfach. Ich will alles selbst machen und auf dem Weg dabei einige Sachen ausprobieren, die ich schon im
+        Hinterkopf habe. Aber nicht heute. Heute wird es einfach nur das in der Kommandozeile via nano Editor eingetippte
+        HTML-Dokument. Keine Logik, kein CSS, gar nichts.
+    </p>
+    <h2>What to expect next</h2>
+    <p>
+        Für die nächsten Tage habe ich mir schon ein paar Features vorgenommen:
+        <ul>
+            <li>https</li>
+            <li>deploy via git</li>
+            <li>Blogbeiträge mit Markdown</li>
+            <li>...</li </ul>
+    </p>
 
 </body>
-</html>
 
+</html>
