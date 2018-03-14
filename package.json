@@ -1,0 +1,18 @@
+{
+  "name": "muxe-de-blog",
+  "version": "1.0.0",
+  "description": "my blog",
+  "main": "index.js",
+  "scripts": {
+    "serve": "browser-sync start --server --files \"./public/**/*\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://muxe@schedar.uberspace.de/home/muxe/repos/blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "browser-sync": "^2.23.6"
+  }
+}
