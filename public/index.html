@@ -13,37 +13,48 @@
 <body>
     <div class="main">
         <div class="blog-post">
+            <h1>#004 2018-03-15 browser-sync</h1>
+            <p>Ich have Fieber. Daher ist dieser Blogeintrag sehr sehr kurz.</p>
+            <p>
+                Zum lokalen Ansehen meines Blogs in diesem frühen Entwicklungsstadium verwende ich browser-sync
+            </p>
+            <p>
+                <a href="https://www.browsersync.io/">https://www.browsersync.io/</a>
+            </p>
+            <pre># package.json
+
+"scripts": {
+  "serve": "browser-sync start --server --files \"./public/**/*\""
+}
+            </pre>
+        </div>
+        <div class="blog-post">
             <h1>#003 2018-03-14 Deployment mit git</h1>
             <p>
                 Eine der für mich schon immer lästigsten Aufgaben bei der Entwicklung einer Webseite, ist das Hochladen der Dateien. Für
                 gewöhnlich habe ich das bisher immer über ftp erledigt. Ich habe also erst Änderungen am Quellcode vorgenommen,
                 diesen dann eventuell in git eingecheckt und dann, wenn ich meinte, das alles so weit ist, per ftp hochgeladen.
                 Also erst einmal einen ftp-client starten (im schlimmsten Fall den Windows Explorer), dann grübeln, wie das
-                Passwort für den ftp-Zugang war und dann überlegen, welche Dateien eigentlich ausgetauscht werden müssen. Alle? Manche?
-                Hatte ich vorher eventuell schon Dateien hochgeladen, die nicht in der Versionsverwaltung sind?
+                Passwort für den ftp-Zugang war und dann überlegen, welche Dateien eigentlich ausgetauscht werden müssen.
+                Alle? Manche? Hatte ich vorher eventuell schon Dateien hochgeladen, die nicht in der Versionsverwaltung sind?
             </p>
             <p>
-                Diesen Blog lade ich nicht mit ftp auf meinen Webspace. Für diesen Blog mache ich mir den Umstand zu nutze, dass
-                der Quellcode unter git-Versionskontrolle liegt. Dafür habe ich nicht nur lokal und irgendwo bei einem der typischen
-                Anbieter (github, bitbucket, ...) ein Repository, sondern auch auf dem Webserver. Auf dem Webserver ist ein bare
-                Repository.
-                <pre>git init --bare</pre>
-                Dieses Repository wird nun in der .git/config im lokalen Projekt eingetragen:
+                Diesen Blog lade ich nicht mit ftp auf meinen Webspace. Für diesen Blog mache ich mir den Umstand zu nutze, dass der Quellcode
+                unter git-Versionskontrolle liegt. Dafür habe ich nicht nur lokal und irgendwo bei einem der typischen Anbieter
+                (github, bitbucket, ...) ein Repository, sondern auch auf dem Webserver. Auf dem Webserver ist ein bare Repository.
+                <pre>git init --bare</pre> Dieses Repository wird nun in der .git/config im lokalen Projekt eingetragen:
                 <pre>[remote "production"]
     url = ssh://muxe@schedar.uberspace.de/home/muxe/repos/blog.git
-    fetch = +refs/heads/*:refs/remotes/production/*</pre>
-                und kann nun als Ziel für git pushes verwendet werden.
-                <pre>git push production master</pre>
-                Jetzt ist zwar alles auf dem Webserver, ist jedoch noch nicht verfügbar, da bare Repositories keine Kopie des aktuellen
-                Arbeitsstandes beinhalten. Dazu muss der aktuelle Stand erst aus dem Repository ausgecheckt werden. Im Optimal fall
-                in einen anderen Ordner.
-                <pre>GIT_WORK_TREE="/YOUR/TARGET/PATH" git checkout -f master</pre>
-                Beinhaltet das Repository ausschließlich die anzuzeigenden Dateien, kann hierzu schon der öffentlich erreichbare Ordner
-                verwendet werden. Müssen erst noch Compiler ihr Werk verrichten und die Seite bauen oder nur ein Unterordner ausgeliefert
-                werden sollte ein anderer Ordner verwendet werden.
-                Damit diese Schritte nicht alle manuell ausgeführt werden müssen, werden sie einfach in einem git-hook implementiert.
-                In diesem Fall ist der passende hook "post-receive" (wird also nach dem push in das Repository ausgeführt).
-                Meine erste Version, an der sich aber bestimmt noch einiges tun wird sieht wie folgt aus:
+    fetch = +refs/heads/*:refs/remotes/production/*</pre> und kann nun als Ziel für git pushes verwendet werden.
+                <pre>git push production master</pre> Jetzt ist zwar alles auf dem Webserver, ist jedoch noch nicht verfügbar, da bare Repositories keine Kopie
+                des aktuellen Arbeitsstandes beinhalten. Dazu muss der aktuelle Stand erst aus dem Repository ausgecheckt
+                werden. Im Optimal fall in einen anderen Ordner.
+                <pre>GIT_WORK_TREE="/YOUR/TARGET/PATH" git checkout -f master</pre> Beinhaltet das Repository ausschließlich die anzuzeigenden Dateien, kann hierzu schon der öffentlich erreichbare
+                Ordner verwendet werden. Müssen erst noch Compiler ihr Werk verrichten und die Seite bauen oder nur ein Unterordner
+                ausgeliefert werden sollte ein anderer Ordner verwendet werden. Damit diese Schritte nicht alle manuell ausgeführt
+                werden müssen, werden sie einfach in einem git-hook implementiert. In diesem Fall ist der passende hook "post-receive"
+                (wird also nach dem push in das Repository ausgeführt). Meine erste Version, an der sich aber bestimmt noch
+                einiges tun wird sieht wie folgt aus:
                 <pre>
 #!/usr/bin/env ruby
 # post-receive
