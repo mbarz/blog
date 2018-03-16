@@ -8,15 +8,37 @@
     <title>muxes blog</title>
     <link rel="stylesheet" href="style.css">
     <link rel="shortcut icon" href="favicon.ico?v=1">
+    <script src="lib/marked.js"></script>
 </head>
 
 <body>
     <div class="main">
+        <div class="blog-post" id="post005">
+            <script>
+                document.getElementById('post005').innerHTML = marked(`
+# #005 2018-03-16 Markdown
+In der Arbeit mit git und Mattermost habe ich Markdown liebgewonnen. Mit Markdown lassen sich die grundlegenden
+Formatierungen für einen Text schreiben, ohne HTML verwenden zu müssen und es kann relative gefahrlos eingebunden
+werden.
+
+Ich habe mir vorgenommen auch in meinem Blog früher oder später Markdown zu verwenden, um meine Beiträge zu schreiben.
+Dieser Eintrag heute ist der erste in Markdown. Dafür verwende ich [marked](https://www.npmjs.com/package/marked)
+
+Alles, was ich mit dieser Bibliothek tun muss, ist sie per script tag einzubinden.
+${'``` html'}
+${"document.getElementById('post005').innerHTML = marked(`# my blog title...`)"}
+${'```'}
+Et voila, Ich kann meinen Blogeintrag in Markdown schreiben. Der nächste Schritt ist dann wohl die Einträge endlich aus der
+html Datei herauszulösen und separat zur Darstellungslogik zu halten. Mit Markdown als Formatierung sind die Grundsteine
+dafür jedenfalls gesetzt.
+`);
+            </script>
+        </div>
         <div class="blog-post">
             <h1>#004 2018-03-15 browser-sync</h1>
             <p>Ich have Fieber. Daher ist dieser Blogeintrag sehr sehr kurz.</p>
             <p>
-                Zum lokalen Ansehen meines Blogs in diesem frühen Entwicklungsstadium verwende ich browser-sync
+                Zum lokalen Ansehen meines Blogs in diesm frühen Entwicklungsstadium verwende ich browser-sync
             </p>
             <p>
                 <a href="https://www.browsersync.io/">https://www.browsersync.io/</a>
