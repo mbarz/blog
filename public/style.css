@@ -71,3 +71,6 @@ body {
   overflow: auto;
 }
 
+.blog-post code {
+  font-family: "Ubuntu Monospace", "Consolas", Courier, monospace;
+}
