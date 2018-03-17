@@ -1,0 +1,34 @@
+{
+  "posts": [
+    {
+      "id": "006",
+      "date": "2018-03-17",
+      "title": "JQuery"
+    },
+    {
+      "id": "005",
+      "date": "2018-03-16",
+      "title": "Markdown"
+    },
+    {
+      "id": "004",
+      "date": "2018-03-15",
+      "title": "Browser-Sync"
+    },
+    {
+      "id": "003",
+      "date": "2018-03-14",
+      "title": "Deployment mit Git"
+    },
+    {
+      "id": "002",
+      "date": "2018-03-13",
+      "title": "Https mit Uberspace"
+    },
+    {
+      "id": "001",
+      "date": "2018-03-12",
+      "title": "dev blog"
+    }
+  ]
+}

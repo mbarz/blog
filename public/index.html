@@ -6,192 +6,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width" />
     <title>muxes blog</title>
+    <link href="lib/prism.css" rel="stylesheet" />
     <link rel="stylesheet" href="style.css">
+    
     <link rel="shortcut icon" href="favicon.ico?v=1">
+    <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E="
+        crossorigin="anonymous"></script>
     <script src="lib/marked.js"></script>
+    <script src="lib/prism.js"></script>
+    <script src="main.js"></script>
 </head>
 
 <body>
-    <div class="main">
-        <div class="blog-post" id="post005">
-            <script>
-                document.getElementById('post005').innerHTML = marked(`
-# #005 2018-03-16 Markdown
-In der Arbeit mit git und Mattermost habe ich Markdown liebgewonnen. Mit Markdown lassen sich die grundlegenden
-Formatierungen für einen Text schreiben, ohne HTML verwenden zu müssen und es kann relative gefahrlos eingebunden
-werden.
-
-Ich habe mir vorgenommen auch in meinem Blog früher oder später Markdown zu verwenden, um meine Beiträge zu schreiben.
-Dieser Eintrag heute ist der erste in Markdown. Dafür verwende ich [marked](https://www.npmjs.com/package/marked)
-
-Alles, was ich mit dieser Bibliothek tun muss, ist sie per script tag einzubinden.
-${'``` html'}
-${"document.getElementById('post005').innerHTML = marked(`# my blog title...`)"}
-${'```'}
-Et voila, Ich kann meinen Blogeintrag in Markdown schreiben. Der nächste Schritt ist dann wohl die Einträge endlich aus der
-html Datei herauszulösen und separat zur Darstellungslogik zu halten. Mit Markdown als Formatierung sind die Grundsteine
-dafür jedenfalls gesetzt.
-`);
-            </script>
-        </div>
-        <div class="blog-post">
-            <h1>#004 2018-03-15 browser-sync</h1>
-            <p>Ich have Fieber. Daher ist dieser Blogeintrag sehr sehr kurz.</p>
-            <p>
-                Zum lokalen Ansehen meines Blogs in diesm frühen Entwicklungsstadium verwende ich browser-sync
-            </p>
-            <p>
-                <a href="https://www.browsersync.io/">https://www.browsersync.io/</a>
-            </p>
-            <pre># package.json
-
-"scripts": {
-  "serve": "browser-sync start --server --files \"./public/**/*\""
-}
-            </pre>
-        </div>
-        <div class="blog-post">
-            <h1>#003 2018-03-14 Deployment mit git</h1>
-            <p>
-                Eine der für mich schon immer lästigsten Aufgaben bei der Entwicklung einer Webseite, ist das Hochladen der Dateien. Für
-                gewöhnlich habe ich das bisher immer über ftp erledigt. Ich habe also erst Änderungen am Quellcode vorgenommen,
-                diesen dann eventuell in git eingecheckt und dann, wenn ich meinte, das alles so weit ist, per ftp hochgeladen.
-                Also erst einmal einen ftp-client starten (im schlimmsten Fall den Windows Explorer), dann grübeln, wie das
-                Passwort für den ftp-Zugang war und dann überlegen, welche Dateien eigentlich ausgetauscht werden müssen.
-                Alle? Manche? Hatte ich vorher eventuell schon Dateien hochgeladen, die nicht in der Versionsverwaltung sind?
-            </p>
-            <p>
-                Diesen Blog lade ich nicht mit ftp auf meinen Webspace. Für diesen Blog mache ich mir den Umstand zu nutze, dass der Quellcode
-                unter git-Versionskontrolle liegt. Dafür habe ich nicht nur lokal und irgendwo bei einem der typischen Anbieter
-                (github, bitbucket, ...) ein Repository, sondern auch auf dem Webserver. Auf dem Webserver ist ein bare Repository.
-                <pre>git init --bare</pre> Dieses Repository wird nun in der .git/config im lokalen Projekt eingetragen:
-                <pre>[remote "production"]
-    url = ssh://muxe@schedar.uberspace.de/home/muxe/repos/blog.git
-    fetch = +refs/heads/*:refs/remotes/production/*</pre> und kann nun als Ziel für git pushes verwendet werden.
-                <pre>git push production master</pre> Jetzt ist zwar alles auf dem Webserver, ist jedoch noch nicht verfügbar, da bare Repositories keine Kopie
-                des aktuellen Arbeitsstandes beinhalten. Dazu muss der aktuelle Stand erst aus dem Repository ausgecheckt
-                werden. Im Optimal fall in einen anderen Ordner.
-                <pre>GIT_WORK_TREE="/YOUR/TARGET/PATH" git checkout -f master</pre> Beinhaltet das Repository ausschließlich die anzuzeigenden Dateien, kann hierzu schon der öffentlich erreichbare
-                Ordner verwendet werden. Müssen erst noch Compiler ihr Werk verrichten und die Seite bauen oder nur ein Unterordner
-                ausgeliefert werden sollte ein anderer Ordner verwendet werden. Damit diese Schritte nicht alle manuell ausgeführt
-                werden müssen, werden sie einfach in einem git-hook implementiert. In diesem Fall ist der passende hook "post-receive"
-                (wird also nach dem push in das Repository ausgeführt). Meine erste Version, an der sich aber bestimmt noch
-                einiges tun wird sieht wie folgt aus:
-                <pre>
-#!/usr/bin/env ruby
-# post-receive
-
-# 1. Read STDIN (Format: "from_commit to_commit branch_name")
-from, to, branch = ARGF.read.split " "
-
-# 2. Only deploy if master branch was pushed
-if (branch =~ /master$/) == nil
-    puts "Received branch #{branch}, not deploying."
-    exit
-end
-
-# 3. Copy files to deploy directory
-
-deploy_to_dir = '/home/muxe/tmp/blog'
-`mkdir #{deploy_to_dir}`
-# checkout current git
-`GIT_WORK_TREE="#{deploy_to_dir}" git checkout -f master`
-puts "DEPLOY: master(#{to}) copied to '#{deploy_to_dir}'"
-
-# 4. Deployment Tasks
-
-# copy public dir to html
-
-html_dir = '/home/muxe/html/blog'
-`rm -rf #{html_dir}/*`
-`cp -a  #{deploy_to_dir}/public/. #{html_dir}/`
-puts "DEPLOY: #{deploy_to_dir}/public copied to '#{html_dir}'"
-
-# cleanup tmp
-# `rm -rf #{deploy_to_dir}`
-                </pre>
-            </p>
-        </div>
-        <div class="blog-post">
-            <h1>#0002 2018-03-13 https mit uberspace.de</h1>
-            <p>
-                Heute habe ich https für meine auf uberspace gehosteten Seiten eingerichtet. Dank hervorragendem Let's-Encrypt-Tooling auf
-                uberspace war das Ganze überhaupt kein Problem. Alles, was man benötigt, ist recht einfach in der uberspace
-                Dokumentation zu finden.
-            </p>
-            <a href="https://wiki.uberspace.de/webserver:https">https://wiki.uberspace.de/webserver:https</a>
-            <p>
-                Was ich bei der ganzen Aktion erst vergessen hatte, war das Scharfschalten von https, was unter "importieren" erklärt wird.
-                Jetzt funktioniert aber alles einwandfrei.
-            </p>
-            <p>
-                <a href="https://futter.muxe.de">https://futter.muxe.de</a> fehlt leider noch, weil ich hier noch mit einer Strato-Umleitung arbeite und die
-                domain nicht uberspace hinzugefügt habe.
-            </p>
-            <p>
-                Nachdem ich schon https laufen habe, sollte ich meine Besucher auch dazu bewegen https zu verwenden. Um das zu erwirken,
-                hilft wieder einmal die Dokumentation auf uberspace
-                <a href="https://wiki.uberspace.de/webserver:htaccess">https://wiki.uberspace.de/webserver:htaccess</a>, denn alles was man braucht, ist eine entsprechend konfigurierte
-                .htaccess Datei.
-                <pre>#.htaccess
-RewriteEngine on
-RewriteCond %{HTTPS} !=on
-RewriteCond %{ENV:HTTPS} !=on
-RewriteRule .* https://%{SERVER_NAME}%{REQUEST_URI} [R=301,L]</pre>
-            </p>
-            <h2>für morgen schon vorbereitet: deploy mit git</h2>
-            <p>Morgen werde ich hier wahrscheinlich ein bisschen über das deployment dieses Blogs schreiben. Sehr kurz, sehr
-                knapp. Trotzdem zu viel für heute.</p>
-        </div>
-        <div class="blog-post">
-            <h1>#0001 2018-03-12 dev blog</h1>
-            <p>
-                Hallo. Dies ist der erneute Versuch eines Blogs. Fokus soll dieses mal auf der Softwareentwicklung liegen. Ich will hier
-                einige Sachen aus meinem Entwickleralltag reflektieren. Weiterhin soll der Blog mich selbst dazu anregen,
-                verschiedene Webtechnologien auszutesten und vor allem für mich selbst meine Erfahrungen damit in irgendeiner
-                Form zu dokumentieren
-            </p>
-            <h2>Erstellen einer Subdomain für diesen Blog</h2>
-            <p>
-                Als kleinen einfachen Start, beginne ich heute in diesem Blog mit der Einrichtung des selben in kleinen Schritten. Als erstes
-                braucht der Blog eine einfach erreichbare Seite. Meine Webseite ist muxe.de, also ist die subdomain blog.muxe.de
-                ja irgendwie naheliegend. Derzeit verwende ich strato als Domain-Provider und uberspace.de um dort all meine
-                Dateien hochzuladen und verfügbar zu machen.
-            </p>
-            <p>
-                Mit uberspace ist es sehr einfach neue Subdomains zu den bestehenden Domains hinzuzufügen.
-                <ul>
-                    <li>
-                        <a href="https://wiki.uberspace.de/domain:verwalten#domains_verbinden">https://wiki.uberspace.de/domain:verwalten#domains_verbinden</a>
-                    </li>
-                    <li>
-                        <a href="https://wiki.uberspace.de/domain:subdomain?s[]=subdomains">https://wiki.uberspace.de/domain:subdomain?s[]=subdomains</a>
-                    </li>
-                </ul>
-                Es musste lediglich ein Befehl eingetragen werden, der eine A/AAAA Konfiguration ausspuckt, die dann bei Strato eingegeben
-                werden muss. Ein paar Minuten warten und die Subdomain zeigt auf meine Daten bei uberspace.de. Dann noch
-                einen Order/Symlink für die Subdomain anlegen, damit nicht muxe.de selbst angezeigt, wird sondern das, was
-                auch immer ich als Blog hochlade und dann noch die Seite selbst
-            </p>
-            <h2>Klein anfangen</h2>
-            <p>
-                Jetzt fehlt also nur die Seite selbst. Ich könnte jetzt hier einfach ein wordpress hochladen und konfigurieren, das wäre
-                aber zu einfach. Ich will alles selbst machen und auf dem Weg dabei einige Sachen ausprobieren, die ich schon
-                im Hinterkopf habe. Aber nicht heute. Heute wird es einfach nur das in der Kommandozeile via nano Editor
-                eingetippte HTML-Dokument. Keine Logik, kein CSS, gar nichts.
-            </p>
-            <h2>What to expect next</h2>
-            <p>
-                Für die nächsten Tage habe ich mir schon ein paar Features vorgenommen:
-                <ul>
-                    <li>https</li>
-                    <li>deploy via git</li>
-                    <li>Blogbeiträge mit Markdown</li>
-                    <li>...</li </ul>
-            </p>
-        </div>
+    <div id="main">
+        <!-- content will be inserted here by javascript logic -->
     </div>
-
 </body>
 
 </html>

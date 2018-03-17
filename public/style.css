@@ -7,19 +7,27 @@ body {
 }
 
 body {
-  background: #000;
-  color: greenyellow;
-  font-family: "Ubuntu Monospace", "Consolas", Courier, monospace;
+  background: rgb(0, 10, 0);
+
+  font-family: sans-serif;
   font-size: 11pt;
 }
 
-.main {
+#main {
   margin: 0 auto;
-  max-width: 1000px;
+  max-width: 800px;
   min-height: 100%;
-  border-left: 1px solid greenyellow;
-  border-right: 1px solid greenyellow;
+  border-left: 1px solid rgb(150, 255, 150);
+  border-right: 1px solid rgb(150, 255, 150);
   padding: 20px;
+}
+
+.blog-post {
+  color: rgb(240, 255, 240);
+}
+
+.blog-post h1, .blog-post h2, .blog-post h3 {
+  color: rgb(150, 255, 150);
 }
 
 .blog-post p {
@@ -40,7 +48,7 @@ body {
 }
 
 .blog-post + .blog-post {
-  border-top: 1px solid greenyellow;
+  border-top: 1px solid rgb(150, 255, 150);
   padding-top: 20px;
 }
 
@@ -49,16 +57,20 @@ body {
 }
 
 .blog-post a {
-  color: greenyellow;
+  color: rgb(150, 255, 150);
   word-break: break-all;
 }
 
 .blog-post a:hover {
-  color: white;
+  color: rgb(200, 200, 0);
 }
 
 .blog-post pre {
   background: rgb(0, 20, 0);
   padding: 10px;
   overflow: auto;
+}
+
+.blog-post code {
+  font-family: "Ubuntu Monospace", "Consolas", Courier, monospace;
 }
