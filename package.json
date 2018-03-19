@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "serve": "cd public && browser-sync start --server --files \"./**/*\"",
-    "deploy": "./scripts/deploy.sh"
+    "deploy": "bash ./scripts/deploy.sh"
   },
   "repository": {
     "type": "git",
