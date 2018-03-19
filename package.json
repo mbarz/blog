@@ -4,7 +4,8 @@
   "description": "my blog",
   "main": "index.js",
   "scripts": {
-    "serve": "cd public && browser-sync start --server --files \"./**/*\""
+    "serve": "cd public && browser-sync start --server --files \"./**/*\"",
+    "deploy": "./scripts/deploy.sh"
   },
   "repository": {
     "type": "git",
