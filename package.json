@@ -4,7 +4,7 @@
   "description": "my blog",
   "main": "index.js",
   "scripts": {
-    "serve": "cd public && browser-sync start --server --files \"./**/*\"",
+    "serve-ui": "browser-sync start -c bs-config.js",
     "deploy": "bash ./scripts/deploy.sh",
     "serve-api": "cd server && npm run nodemon"
   },
@@ -15,7 +15,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "browser-sync": "^2.23.6"
+    "browser-sync": "^2.23.6",
+    "http-proxy": "^1.16.2"
   },
   "dependencies": {
     "marked": "^0.3.17"

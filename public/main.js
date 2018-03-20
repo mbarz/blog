@@ -3,28 +3,19 @@ $(document).ready(() => {
 });
 
 function loadList() {
-  return fetch("posts/list.json")
-    .then(response => response.json())
-    .then(blog => blog.posts);
+  return fetch("api/posts").then(response => response.json());
 }
 
 function showList(list) {
-  const promises = list.map(post =>
-    fetch(`posts/${post.id}.md`)
-      .then(response => response.text())
-      .then(content => ({ ...post, content }))
-  );
-  Promise.all(promises).then(loaded => {
-    loaded.sort((p1, p2) => {
-      const d1 = new Date(p1.date).getTime();
-      const d2 = new Date(p2.date).getTime();
-      return d1 - d2;
-    });
-    for (post of loaded) {
-      printPost(post);
-    }
-    Prism.highlightAll();
+  list.sort((p1, p2) => {
+    const d1 = new Date(p1.date).getTime();
+    const d2 = new Date(p2.date).getTime();
+    return d1 - d2;
   });
+  for (post of list) {
+    printPost(post);
+  }
+  Prism.highlightAll();
 }
 
 function printPost(post) {
