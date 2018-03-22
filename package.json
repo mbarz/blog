@@ -4,6 +4,7 @@
   "description": "my blog",
   "main": "index.js",
   "scripts": {
+    "test": "echo 'no testing right now'",
     "serve-ui": "browser-sync start -c bs-config.js",
     "deploy": "bash ./scripts/deploy.sh",
     "serve-api": "cd server && npm run nodemon"
