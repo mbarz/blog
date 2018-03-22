@@ -7,7 +7,7 @@ body {
 }
 
 body {
-  background: rgb(0, 10, 0);
+  background: rgb(0, 0, 0);
 
   font-family: sans-serif;
   font-size: 11pt;
@@ -26,7 +26,9 @@ body {
   color: rgb(240, 255, 240);
 }
 
-.blog-post h1, .blog-post h2, .blog-post h3 {
+.blog-post h1,
+.blog-post h2,
+.blog-post h3 {
   color: rgb(150, 255, 150);
 }
 
@@ -66,7 +68,7 @@ body {
 }
 
 .blog-post pre {
-  background: rgb(0, 20, 0);
+  background: rgb(0, 10, 0);
   padding: 10px;
   overflow: auto;
 }
