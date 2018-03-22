@@ -1,3 +1,7 @@
+language: node_js
+node_js:
+  - "node"
+
 addons:
   ssh_known_hosts: schedar.uberspace.de
 
