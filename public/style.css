@@ -13,13 +13,35 @@ body {
   font-size: 11pt;
 }
 
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(10,30,10);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(50,80,50);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(50,100,50);
+}
+
 #main {
   margin: 0 auto;
   max-width: 800px;
   min-height: 100%;
-  border-left: 1px solid rgb(150, 255, 150);
-  border-right: 1px solid rgb(150, 255, 150);
   padding: 20px;
+}
+
+@media screen and (min-width: 900px) {
+  #main {
+    border-left: 1px solid rgb(150, 255, 150);
+    border-right: 1px solid rgb(150, 255, 150);
+  }
 }
 
 .blog-post {
@@ -43,6 +65,7 @@ body {
 }
 
 @media screen and (min-width: 500px) {
+  
   .blog-post p {
     text-align: justify;
     text-justify: newspaper;
