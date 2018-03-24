@@ -1,9 +1,14 @@
 $(document).ready(() => {
-  loadList().then(list => showList(list));
+  loadList()
+    .then(list => showList(list))
+    .catch(err => printError(err));
 });
 
 function loadList() {
-  return fetch("api/posts").then(response => response.json());
+  return fetch("api/posts").then(response => {
+    if (!response.ok) throw new Error(`unable to load (${response.status})`);
+    else return response.json();
+  });
 }
 
 function showList(list) {
@@ -30,5 +35,13 @@ function printPost(post) {
   contentDiv.html(marked(post.content));
   postDiv.append(contentDiv);
 
+  main.prepend(postDiv);
+}
+
+function printError(err) {
+  // console.error(err);
+  const main = $("#main");
+  const postDiv = $('<div class="blog-post">');
+  postDiv.html("Sorry, Unable to load blog entries...");
   main.prepend(postDiv);
 }

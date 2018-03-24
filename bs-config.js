@@ -32,7 +32,7 @@ module.exports = {
       port: 8080
     }
   },
-  files: ["public/**/*", "server/posts/**/*"],
+  files: ["public/**/*", "posts/**/*"],
   watchEvents: ["change"],
   watchOptions: {
     ignoreInitial: true

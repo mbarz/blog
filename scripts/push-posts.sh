@@ -1,0 +1,1 @@
+rsync -rav posts/. muxe@schedar.uberspace.de:/home/muxe/api/blog/posts/
