@@ -19,8 +19,11 @@ var proxy = httpProxy.createProxyServer({
 });
 
 var proxyMiddleware = (req, res, next) => {
-  if (req.url.indexOf("api") >= 0) {
-    console.log("proxy api request to http://localhost:8080/");
+  const redirects = ["/api"];
+  const redirect =
+    redirects.map(part => req.url.indexOf(part) === 0).indexOf(true) >= 0;
+  if (redirect) {
+    console.log(`proxy api request from ${req.url} to http://localhost:8080/`);
     proxy.web(req, res);
   } else next();
 };
