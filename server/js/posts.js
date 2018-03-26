@@ -3,6 +3,7 @@ var path = require("path");
 var Config = require("./config");
 var FileUtils = require("./file-utils");
 var leftPad = require("left-pad");
+var Auth = require("./passport");
 
 var router = express.Router();
 
@@ -39,7 +40,7 @@ router.get("/:id", (req, res) =>
     .catch(err => res.status(500).send({ message: "not able to load post" }))
 );
 
-router.post("/", (req, res) => {
+router.post("/", Auth.isAuthenticated, (req, res) => {
   const data = req.body;
   if (data.title && data.date && data.content) {
     create(data)
@@ -53,9 +54,8 @@ router.post("/", (req, res) => {
   }
 });
 
-router.put("/:id", (req, res) => {
+router.put("/:id", Auth.isAuthenticated, (req, res) => {
   const data = req.body;
-  console.log(data);
   if (data.title && data.date && data.content && data.id) {
     update(data)
       .then(() => res.send(data))
@@ -68,7 +68,7 @@ router.put("/:id", (req, res) => {
   }
 });
 
-router.delete("/:id", (req, res) => {
+router.delete("/:id", Auth.isAuthenticated, (req, res) => {
   deletePost(req.params.id)
     .then(() => res.send({ message: "deleted " + req.params.id }))
     .catch(err => {
