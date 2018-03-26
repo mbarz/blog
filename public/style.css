@@ -131,9 +131,22 @@ textarea {
 }
 
 input,
-textarea {
+textarea,
+select {
   padding: 10px;
   border: 0;
+  background: rgb(20, 40, 20);
+  color: white;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  outline: rgb(150, 255, 150) auto 5px;
+}
+
+textarea {
+  resize: none;
 }
 
 .blog-post-editor {
@@ -151,6 +164,11 @@ button {
   color: white;
 }
 
+header {
+  display: flex;
+  align-items: center;
+}
+
 footer > button + button {
   margin-left: 10px;
 }
@@ -161,6 +179,7 @@ button:hover {
 
 .blog-post-editor > div > input,
 .blog-post-editor > div > textarea,
-.blog-post-editor > footer > .spacer {
+.blog-post-editor > footer > .spacer,
+.blog-post-editor > header > .spacer {
   flex-grow: 1;
 }

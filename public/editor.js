@@ -33,9 +33,44 @@ $(document).ready(() => {
     });
 });
 
-function load() {
+async function load() {
+  const selector = $("#post-selector");
+  selector.change(() => {
+    const id = selector.val();
+    if (id) loadPost(id);
+    else showCreationForm();
+  });
+
   id = urlParams().id;
-  const post = fetch(`/api/posts/${id}`)
+  if (!id) return showCreationForm();
+  else loadPost(id);
+}
+
+async function reloadList() {
+  const selector = $("#post-selector");
+  const selected = selector.val();
+  selector.html("");
+
+  const o = $("<option>");
+  o.val(undefined);
+  o.text(`new`);
+  selector.append(o);
+
+  const list = await fetch("/api/posts").then(response => response.json());
+  const divs = list
+    .map(item => {
+      const o = $("<option>");
+      o.val(item.id);
+      o.text(`${item.id} - ${item.date} - ${item.title.substring(0, 10)}...`);
+      return o;
+    })
+    .forEach(o => selector.append(o));
+  selector.val(id);
+  return selector;
+}
+
+function loadPost(id) {
+  return fetch(`/api/posts/${id}`)
     .then(response => {
       if (response.ok) return response.json();
       else undefined;
@@ -47,6 +82,7 @@ function load() {
 }
 
 function showPost(post) {
+  reloadList();
   id = post.id;
   history.pushState({}, "", "edit.html?id=" + id);
   $("#header").text(`Edit Post ${id}`);
@@ -56,6 +92,7 @@ function showPost(post) {
 }
 
 function showCreationForm() {
+  reloadList();
   id = undefined;
   history.pushState({}, "", "edit.html");
   $("#post-title").val("");
