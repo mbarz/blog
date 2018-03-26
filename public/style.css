@@ -19,22 +19,23 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgb(10,30,10);
+  background: rgb(10, 30, 10);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgb(50,80,50);
+  background: rgb(50, 80, 50);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgb(50,100,50);
+  background: rgb(50, 100, 50);
 }
 
 #main {
   margin: 0 auto;
   max-width: 800px;
   min-height: 100%;
-  padding: 20px;
+  display: flex;
+  flex-direction: column;
 }
 
 @media screen and (min-width: 900px) {
@@ -45,6 +46,7 @@ body {
 }
 
 .blog-post {
+  margin: 20px;
   color: rgb(240, 255, 240);
 }
 
@@ -65,7 +67,6 @@ body {
 }
 
 @media screen and (min-width: 500px) {
-  
   .blog-post p {
     text-align: justify;
     text-justify: newspaper;
@@ -96,6 +97,52 @@ body {
   overflow: auto;
 }
 
-.blog-post code {
-  font-family: "Ubuntu Monospace", "Consolas", Courier, monospace;
+.blog-post code,
+input,
+textarea {
+  font-family: 'Ubuntu Monospace', 'Consolas', Courier, monospace;
+}
+
+.blog-post-editor > div {
+  display: flex;
+  margin-bottom: 10px;
+}
+
+.blog-post-editor > footer {
+  display: flex;
+}
+
+.blog-post-editor .post-editor-content-row {
+  flex-grow: 1;
+}
+
+input,
+textarea {
+  padding: 10px;
+  border: 0;
+}
+
+.blog-post-editor {
+  flex-grow: 1;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  background: rgb(50, 100, 50);
+  cursor: pointer;
+  border: 0;
+  padding: 5px 10px;
+  color: white;
+}
+
+button:hover {
+  background: rgb(50, 80, 50);
+}
+
+.blog-post-editor > div > input,
+.blog-post-editor > div > textarea,
+.blog-post-editor > footer > .spacer {
+  flex-grow: 1;
 }
