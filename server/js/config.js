@@ -1,17 +1,15 @@
-var fs = require("fs");
-var path = require("path");
+var fs = require('fs');
+var path = require('path');
+var FileUtils = require('./file-utils');
+
+var loaded = undefined;
 
 function load() {
-  return new Promise((resolve, reject) => {
-    fs.readFile(
-      path.join(__dirname, "..", "config.json"),
-      "utf8",
-      (err, content) => {
-        if (err) return reject(err);
-        else return resolve(JSON.parse(content));
-      }
-    );
-  });
+  if (loaded) return loaded;
+  console.log('loading config from file');
+  var filePath = path.join(__dirname, '..', 'config.json');
+  loaded = FileUtils.readFile(filePath).then(content => JSON.parse(content));
+  return loaded;
 }
 
 exports.load = load;
