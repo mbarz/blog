@@ -8,7 +8,7 @@
     "serve-ui": "browser-sync start -c bs-config.js",
     "deploy": "bash ./scripts/deploy.sh",
     "serve-api":
-      "nodemon server/js/server.js --ignore 'sessions/*' --ignore 'public/*'",
+      "nodemon server/js/server.js --ignore \"sessions/*\" --ignore \"public/*'\" --ignore \"posts/*'\"",
     "start": "node ./server/js/server.js",
     "pull-posts": "bash ./scripts/pull-posts.sh",
     "push-posts": "bash ./scripts/push-posts.sh"
@@ -29,6 +29,7 @@
     "cookie-parser": "^1.4.3",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "left-pad": "^1.2.0",
     "marked": "^0.3.17",
     "morgan": "^1.9.0",
     "passport": "^0.4.0",

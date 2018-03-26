@@ -45,6 +45,15 @@ body {
   }
 }
 
+.message {
+  margin: 20px;
+  padding: 20px;
+  background: rgb(150, 255, 150);
+}
+.error-message {
+  background: rgb(255, 150, 150);
+}
+
 .blog-post {
   margin: 20px;
   color: rgb(240, 255, 240);
@@ -100,12 +109,17 @@ body {
 .blog-post code,
 input,
 textarea {
-  font-family: 'Ubuntu Monospace', 'Consolas', Courier, monospace;
+  font-family: "Ubuntu Monospace", "Consolas", Courier, monospace;
 }
 
 .blog-post-editor > div {
   display: flex;
   margin-bottom: 10px;
+}
+
+.blog-post-editor h1 {
+  color: rgb(150, 255, 150);
+  margin-top: 0;
 }
 
 .blog-post-editor > footer {
@@ -135,6 +149,10 @@ button {
   border: 0;
   padding: 5px 10px;
   color: white;
+}
+
+footer > button + button {
+  margin-left: 10px;
 }
 
 button:hover {
