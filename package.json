@@ -2,19 +2,21 @@
   "name": "muxe-de-blog",
   "version": "1.0.0",
   "description": "my blog",
-  "main": "index.js",
+  "main": "./server/js/server.js",
   "scripts": {
     "test": "echo 'no testing right now'",
     "serve-ui": "browser-sync start -c bs-config.js",
     "deploy": "bash ./scripts/deploy.sh",
     "serve-api": "nodemon server/js/server.js --ignore sessions/*",
-    "start": "node ./server/js/server.js"
+    "start": "node ./server/js/server.js",
+    "pull-posts": "bash ./scripts/pull-posts.sh",
+    "push-posts": "bash ./scripts/push-posts.sh"
   },
   "repository": {
     "type": "git",
-    "url": "ssh://muxe@schedar.uberspace.de/home/muxe/repos/blog.git"
+    "url": "ssh://git@github.com:mbarz/blog.git"
   },
-  "author": "",
+  "author": "Max-Richard Barz",
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.23.6",
