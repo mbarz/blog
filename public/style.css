@@ -8,9 +8,23 @@ body {
 
 body {
   background: rgb(0, 0, 0);
-
+  color: white;
   font-family: sans-serif;
   font-size: 11pt;
+}
+
+#main > header {
+  padding: 10px;
+  border-bottom: 1px solid rgb(150, 255, 150);
+}
+
+#main > header > * + * {
+  margin-left: 10px;
+}
+
+#main > header > h1 {
+  margin: 0;
+  font-size: 13pt;
 }
 
 ::-webkit-scrollbar {
@@ -109,7 +123,7 @@ body {
 .blog-post code,
 input,
 textarea {
-  font-family: "Ubuntu Monospace", "Consolas", Courier, monospace;
+  font-family: 'Ubuntu Monospace', 'Consolas', Courier, monospace;
 }
 
 .blog-post-editor > div {
@@ -179,7 +193,7 @@ button:hover {
 
 .blog-post-editor > div > input,
 .blog-post-editor > div > textarea,
-.blog-post-editor > footer > .spacer,
-.blog-post-editor > header > .spacer {
+footer > .spacer,
+header > .spacer {
   flex-grow: 1;
 }
