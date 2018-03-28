@@ -57,7 +57,9 @@ async function reloadList() {
   o.text(`new`);
   selector.append(o);
 
-  const list = await fetch('/api/posts').then(response => response.json());
+  const list = await fetch('/api/posts', {
+    credentials: 'same-origin'
+  }).then(response => response.json());
   const divs = list
     .map(item => {
       const o = $('<option>');
@@ -71,7 +73,9 @@ async function reloadList() {
 }
 
 function loadPost(id) {
-  return fetch(`/api/posts/${id}`)
+  return fetch(`/api/posts/${id}`, {
+    credentials: 'same-origin'
+  })
     .then(response => {
       if (response.ok) return response.json();
       else undefined;

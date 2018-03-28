@@ -30,8 +30,11 @@ export class FileBasedBlogStorage {
     return this.loadListFromFile();
   }
 
-  public async findAll(): Promise<Post[]> {
-    const list = await this.loadListFromFile();
+  public async findAll(
+    filter: { onlyPublic: boolean } = { onlyPublic: false }
+  ): Promise<Post[]> {
+    let list = await this.loadListFromFile();
+    if (filter.onlyPublic) list = list.filter(item => item.public);
     const promises = list.map(p => this.addContentTo(p));
     return Promise.all(promises);
   }

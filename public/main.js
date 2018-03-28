@@ -5,7 +5,9 @@ $(document).ready(() => {
 });
 
 function loadList() {
-  return fetch('api/posts').then(response => {
+  return fetch('api/posts', {
+    credentials: 'same-origin'
+  }).then(response => {
     if (!response.ok) throw new Error(`unable to load (${response.status})`);
     else return response.json();
   });
@@ -29,6 +31,10 @@ function printPost(post) {
 
   const header = $('<header>');
   header.html(`<h1>#${post.id} ${post.date} ${post.title}</h1>`);
+
+  if (!post.public) {
+    header.append('<div class="spacer"></div><div>(hidden)</div>');
+  }
   postDiv.append(header);
 
   const contentDiv = $('<div>');

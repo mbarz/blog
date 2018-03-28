@@ -55,6 +55,11 @@ async function run() {
     }
   );
 
+  router.get('/logout', (req, res) => {
+    req.logout();
+    res.send({ isAuthenticated: req.isAuthenticated() });
+  });
+
   router.get('/loggedIn', (req, res) => {
     res.send({ isAuthenticated: req.isAuthenticated() });
   });

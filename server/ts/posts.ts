@@ -12,7 +12,7 @@ const storage = new FileBasedBlogStorage();
 
 router.get('/', async (req, res) => {
   storage
-    .findAll()
+    .findAll({ onlyPublic: !req.isAuthenticated() })
     .then(all => res.send(all))
     .catch(err => res.status(500).send({ error: 'not able to read posts' }));
 });
