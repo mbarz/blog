@@ -90,6 +90,8 @@ function showPost(post) {
   $('#post-title').val(post.title);
   $('#post-date').val(post.date);
   $('#post-content').val(post.content);
+  $('#post-content').val(post.content);
+  $('#post-public')[0].checked = post.public;
 }
 
 function showCreationForm() {
@@ -100,6 +102,7 @@ function showCreationForm() {
   $('#post-date').val(new Date().toISOString().substring(0, 10));
   $('#post-content').val('');
   $('#header').text(`Create new Post`);
+  $('#post-public')[0].checked = true;
 }
 
 function update() {
@@ -139,7 +142,8 @@ function getFormValues() {
   const title = $('#post-title').val();
   const date = $('#post-date').val();
   const content = $('#post-content').val();
-  return { title, date, content };
+  const public = $('#post-public')[0].checked;
+  return { title, date, content, public };
 }
 
 function urlParams() {

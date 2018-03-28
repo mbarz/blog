@@ -138,6 +138,7 @@ textarea {
 
 .blog-post-editor > footer {
   display: flex;
+  align-items: center;
 }
 
 .blog-post-editor .post-editor-content-row {
@@ -183,7 +184,7 @@ header {
   align-items: center;
 }
 
-footer > button + button {
+footer > * + * {
   margin-left: 10px;
 }
 

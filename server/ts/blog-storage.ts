@@ -5,7 +5,12 @@ import * as Config from './config';
 import * as FileUtils from './file-utils';
 var leftPad = require('left-pad');
 
-export type PostInfo = { id: string; date: string; title: string };
+export type PostInfo = {
+  id: string;
+  date: string;
+  title: string;
+  public?: boolean;
+};
 
 export type Post = PostInfo & { content: string };
 export type PostCreationData = Post & { id: undefined };
@@ -41,7 +46,12 @@ export class FileBasedBlogStorage {
   public async create(data: PostCreationData) {
     const list = await this.loadListFromFile();
     const id = this.generateId(list);
-    list.unshift({ id, title: data.title, date: data.date });
+    list.unshift({
+      id,
+      title: data.title,
+      date: data.date,
+      public: data.public
+    });
     await Promise.all([
       this.writeListToFile(list),
       this.writePostContentToFile(id, data.content)
@@ -54,7 +64,11 @@ export class FileBasedBlogStorage {
 
     const existing = list.find(p => p.id === post.id);
     if (!existing) throw new BlogStorageError('NOT_FOUND');
-    Object.assign(existing, { date: post.date, title: post.title });
+    Object.assign(existing, {
+      date: post.date,
+      title: post.title,
+      public: post.public
+    });
 
     await Promise.all([
       this.writeListToFile(list),
@@ -86,11 +100,15 @@ export class FileBasedBlogStorage {
     return { ...info, content };
   }
 
-  private loadListFromFile(): Promise<PostInfo[]> {
-    return Config.load()
-      .then(config => path.resolve(config.posts, 'list.json'))
-      .then(filePath => FileUtils.readFile(filePath))
-      .then(content => JSON.parse(content).posts);
+  private async loadListFromFile(): Promise<PostInfo[]> {
+    const config = await Config.load();
+    const filePath = path.resolve(config.posts, 'list.json');
+    const content = await FileUtils.readFile(filePath);
+    const list = JSON.parse(content).posts as PostInfo[];
+    for (const item of list) {
+      if (item.public === undefined) item.public = true;
+    }
+    return list;
   }
 
   private async writeListToFile(list: PostInfo[]) {
