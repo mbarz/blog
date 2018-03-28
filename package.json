@@ -4,11 +4,13 @@
   "description": "my blog",
   "main": "./server/js/server.js",
   "scripts": {
+    "postinstall": "cd server && npm install",
     "test": "echo 'no testing right now'",
     "serve-ui": "browser-sync start -c bs-config.js",
     "deploy": "bash ./scripts/deploy.sh",
-    "serve-api":
-      "nodemon server/js/server.js --ignore \"sessions/*\" --ignore \"public/*'\" --ignore \"posts/*'\"",
+    "build": "npm run build-api",
+    "build-api": "cd server && npm run build",
+    "serve-api": "cd server && npm run serve",
     "start": "node ./server/js/server.js",
     "pull-posts": "bash ./scripts/pull-posts.sh",
     "push-posts": "bash ./scripts/push-posts.sh"
@@ -21,19 +23,10 @@
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.23.6",
-    "http-proxy": "^1.16.2",
-    "nodemon": "^1.17.2"
+    "del": "^3.0.0",
+    "http-proxy": "^1.16.2"
   },
   "dependencies": {
-    "body-parser": "^1.18.2",
-    "cookie-parser": "^1.4.3",
-    "express": "^4.16.3",
-    "express-session": "^1.15.6",
-    "left-pad": "^1.2.0",
-    "marked": "^0.3.17",
-    "morgan": "^1.9.0",
-    "passport": "^0.4.0",
-    "passport-local": "^1.0.0",
-    "session-file-store": "^1.2.0"
+    "marked": "^0.3.17"
   }
 }

@@ -1,0 +1,26 @@
+{
+  "name": "muxe-de-blog-server",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "tsc -p .",
+    "build:w": "tsc -w -p .",
+    "serve": "nodemon --watch 'ts/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ts/server.ts"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.2",
+    "ts-node": "^5.0.1",
+    "typescript": "^2.8.1"
+  },
+  "dependencies": {
+    "@types/node": "^9.6.0",
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "left-pad": "^1.2.0",
+    "morgan": "^1.9.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "session-file-store": "^1.2.0"
+  }
+}

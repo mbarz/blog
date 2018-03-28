@@ -1,5 +1,5 @@
 {
-  "posts": "./posts",
+  "posts": "./../posts",
   "secret": "dev secret",
   "users": [{ "name": "admin", "password": "root" }]
 }
