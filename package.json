@@ -11,7 +11,7 @@
     "build": "npm run build-api",
     "build-api": "cd server && npm run build",
     "serve-api": "cd server && npm run serve",
-    "start": "node ./server/js/server.js",
+    "start": "cd server && npm start",
     "pull-posts": "bash ./scripts/pull-posts.sh",
     "push-posts": "bash ./scripts/push-posts.sh"
   },
@@ -23,7 +23,6 @@
   "license": "ISC",
   "devDependencies": {
     "browser-sync": "^2.23.6",
-    "del": "^3.0.0",
     "http-proxy": "^1.16.2"
   },
   "dependencies": {

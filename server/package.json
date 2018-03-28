@@ -2,14 +2,19 @@
   "name": "muxe-de-blog-server",
   "version": "1.0.0",
   "scripts": {
-    "build": "tsc -p .",
+    "build": "del js && tsc -p .",
     "build:w": "tsc -w -p .",
-    "serve": "nodemon --watch 'ts/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ts/server.ts"
+    "serve":
+      "nodemon --watch 'ts/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ts/server.ts",
+    "serve:js":
+      "nodemon --watch 'ts/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'node' ts/server.tj",
+    "start": "node js/server.js"
   },
   "devDependencies": {
     "nodemon": "^1.17.2",
     "ts-node": "^5.0.1",
-    "typescript": "^2.8.1"
+    "typescript": "^2.8.1",
+    "del-cli": "^1.1.0"
   },
   "dependencies": {
     "@types/node": "^9.6.0",
