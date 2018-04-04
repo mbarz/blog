@@ -1,8 +1,11 @@
 language: node_js
 node_js:
-  - node
+  - 9.10
 addons:
   ssh_known_hosts: schedar.uberspace.de
+
+before_install:
+  - npm install -g npm@latest
 
 install:
   - (cd server && npm ci)
