@@ -1,10 +1,14 @@
-$(document).ready(() => {
-  loadList()
-    .then(list => showList(list))
-    .catch(err => printError(err));
-});
+import $ from 'jquery';
+import marked from 'marked';
+import * as Prism from './lib/prism';
 
-function loadList() {
+import { layout } from './layout';
+
+export function list() {
+  return loadList().then(list => showList(list));
+}
+
+export function loadList() {
   return fetch('api/posts', {
     credentials: 'same-origin'
   }).then(response => {
@@ -13,20 +17,27 @@ function loadList() {
   });
 }
 
-function showList(list) {
+export function showList(list) {
   list.sort((p1, p2) => {
     const d1 = new Date(p1.date).getTime();
     const d2 = new Date(p2.date).getTime();
     return d1 - d2;
   });
-  for (post of list) {
-    printPost(post);
+
+  const body = $(document.body);
+  const main = layout();
+
+  const postContainer = $('<div>');
+  postContainer.addClass('posts');
+  main.append(postContainer);
+
+  for (let post of list) {
+    printPost(post, postContainer);
   }
   Prism.highlightAll();
 }
 
-function printPost(post) {
-  const container = $('#posts');
+function printPost(post, container) {
   const postDiv = $('<div class="blog-post">');
 
   const header = $('<header>');
@@ -42,12 +53,4 @@ function printPost(post) {
   postDiv.append(contentDiv);
 
   container.prepend(postDiv);
-}
-
-function printError(err) {
-  // console.error(err);
-  const main = $('#main');
-  const postDiv = $('<div class="blog-post">');
-  postDiv.html('Sorry, Unable to load blog entries...');
-  main.prepend(postDiv);
 }

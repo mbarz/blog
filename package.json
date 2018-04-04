@@ -8,10 +8,11 @@
   "scripts": {
     "subinstall": "(cd server && npm install) && (cd client && npm install)",
     "test": "echo 'no testing right now'",
-    "serve-ui": "browser-sync start -c bs-config.js",
+    "serve-ui": "cd client && npm run start",
     "deploy": "bash ./scripts/deploy.sh",
-    "build": "npm run build-api",
+    "build": "npm run build-api && npm run build-ui",
     "build-api": "cd server && npm run build",
+    "build-ui": "cd client && npm run build",
     "serve-api": "cd server && npm run serve",
     "start": "cd server && npm start",
     "pull-posts": "bash ./scripts/pull-posts.sh",

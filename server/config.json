@@ -2,5 +2,5 @@
   "posts": "./../posts",
   "secret": "dev secret",
   "users": [{ "name": "admin", "password": "root" }],
-  "public": "./../public"
+  "public": "./../client/dist"
 }
