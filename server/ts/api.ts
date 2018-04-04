@@ -24,7 +24,7 @@ export function apiRouter() {
     }
   );
 
-  router.get("/logout", (req, res) => {
+  router.get("/logout", (req: express.Request, res: express.Response) => {
     req.logout();
     res.send({ isAuthenticated: req.isAuthenticated() });
   });
