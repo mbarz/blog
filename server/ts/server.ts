@@ -67,7 +67,21 @@ async function run() {
     }
   }
   if (fs.existsSync(publicDir)) {
+    publicDir = path.resolve(publicDir);
+    console.log('serving static files from ' + publicDir);
     app.use(express.static(publicDir));
+    app.use((req, res, next) => {
+      const regex = /\/([^\/]*\.[a-z]{1,4}).*$/;
+      const m = req.url.match(regex);
+      if (m && m.length > 0) {
+        const filePath = path.resolve(publicDir, m[1]);
+        fs.exists(filePath, exists => {
+          if (exists) {
+            res.redirect('/' + m[1]);
+          } else res.status(404).send('not found');
+        });
+      } else next();
+    });
     app.use(fallback('index.html', { root: publicDir }));
   } else {
     console.warn(chalk.red('not providing static files'));
