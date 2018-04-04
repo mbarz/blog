@@ -1,6 +1,7 @@
 {
   "name": "muxe-de-blog-server",
   "version": "1.0.0",
+  "private": true,
   "scripts": {
     "build": "del js && tsc -p .",
     "build:w": "tsc -w -p .",
