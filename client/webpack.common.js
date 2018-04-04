@@ -11,7 +11,10 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(['dist']),
     new ExtractTextPlugin('styles.css'),
-    new HtmlWebpackPlugin({ title: 'muxes dev blog' })
+    new HtmlWebpackPlugin({
+      title: 'muxes dev blog',
+      favicon: 'favicon.ico'
+    })
   ],
   optimization: {
     splitChunks: {
