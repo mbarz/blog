@@ -1,11 +1,12 @@
 {
   "name": "muxe-de-blog",
   "private": true,
+  "workspaces": ["server", "client"],
   "version": "1.0.0",
   "description": "my blog",
   "main": "./server/js/server.js",
   "scripts": {
-    "install": "(cd server && npm install) && (cd client && npm install)",
+    "subinstall": "(cd server && npm install) && (cd client && npm install)",
     "test": "echo 'no testing right now'",
     "serve-ui": "browser-sync start -c bs-config.js",
     "deploy": "bash ./scripts/deploy.sh",
