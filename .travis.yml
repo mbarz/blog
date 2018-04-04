@@ -4,6 +4,14 @@ node_js:
 addons:
   ssh_known_hosts: schedar.uberspace.de
 
+install:
+  - (cd server && npm ci)
+  - (cd client && npm ci)
+
+cache:
+  directories:
+  - "$HOME/.npm"
+
 script:
   - npm run build
 before_deploy:

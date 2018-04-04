@@ -5,7 +5,6 @@
   "description": "my blog",
   "main": "./server/js/server.js",
   "scripts": {
-    "postinstall": "cd server && npm install",
     "test": "echo 'no testing right now'",
     "serve-ui": "browser-sync start -c bs-config.js",
     "deploy": "bash ./scripts/deploy.sh",
