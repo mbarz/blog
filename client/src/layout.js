@@ -8,7 +8,9 @@ export function layout() {
   body.append(main);
 
   const header = $('<header>');
-  header.append('<h1>muxes dev blog</h1>');
+  const h1 = $('<h1>muxes dev blog</h1>');
+  h1.click(() => route('/'));
+  header.append(h1);
   const spacer = $(`<div class="spacer"></div>`);
   header.append(spacer);
   header.append(
@@ -19,7 +21,9 @@ export function layout() {
     .then(response => response.json())
     .then(data => {
       if (data.isAuthenticated) {
-        const logoutLink = $(`<a href="/api/logout">logout</a>`);
+        const logoutLink = $(
+          `<a href="/api/logout"><i class="fa fa-lock"></i></a>`
+        );
         logoutLink.click(event => {
           event.preventDefault();
           fetch('/api/logout', {
@@ -29,8 +33,11 @@ export function layout() {
           });
         });
         spacer.after(logoutLink);
-        spacer.after(createLink('/edit', 'editor'));
-        spacer.after(createLink('/', 'list'));
+        spacer.after(createLink('/edit', '<i class="fa fa-edit"></i>'));
+        spacer.after(createLink('/', '<i class="fa fa-list"></i>'));
+      } else {
+        spacer.after(createLink('/login', '<i class="fa fa-unlock"></i>'));
+        spacer.after(createLink('/', '<i class="fa fa-list"></i>'));
       }
     });
   return main;

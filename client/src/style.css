@@ -32,6 +32,7 @@ body {
 #main > header > h1 {
   margin: 0;
   font-size: 13pt;
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar {
@@ -130,7 +131,7 @@ body {
 .blog-post code,
 input,
 textarea {
-  font-family: "Ubuntu Monospace", "Consolas", Courier, monospace;
+  font-family: 'Ubuntu Monospace', 'Consolas', Courier, monospace;
 }
 
 .blog-post-editor > div {

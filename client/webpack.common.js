@@ -13,7 +13,8 @@ module.exports = {
     new ExtractTextPlugin('styles.css'),
     new HtmlWebpackPlugin({
       title: 'muxes dev blog',
-      favicon: 'favicon.ico'
+      favicon: 'favicon.ico',
+      template: 'src/index.html'
     })
   ],
   optimization: {
