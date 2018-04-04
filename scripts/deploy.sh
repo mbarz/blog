@@ -5,7 +5,7 @@ rsync -rav -e ssh --progress --delete public/. muxe@schedar.uberspace.de:/home/m
 
 echo 'copy api logic'
 cp -r client/dist server/public
-rsync -rav -e ssh --delete --exclude=node_modules --exclude=config.json --exclude ts --exclude posts server/. muxe@schedar.uberspace.de:/home/muxe/api/blog
+rsync -rav -e ssh --delete --exclude=node_modules --exclude=config.json --exclude ts --exclude sessions --exclude posts server/. muxe@schedar.uberspace.de:/home/muxe/api/blog
 ssh muxe@schedar.uberspace.de 'source .bash_profile && svc -d ~/service/blog && cd /home/muxe/api/blog && npm install --production && svc -u ~/service/blog'
 
 echo 'done. all files are copied to server. Nothing more to do.'
