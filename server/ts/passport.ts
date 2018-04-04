@@ -1,6 +1,6 @@
-import * as passport from 'passport';
-import { Strategy as LocalStrategy } from 'passport-local';
-import * as Config from './config';
+import * as passport from "passport";
+import { Strategy as LocalStrategy } from "passport-local";
+import * as Config from "./config";
 
 export function initLocalStrategy() {
   passport.use(
@@ -14,7 +14,7 @@ export function initLocalStrategy() {
     })
   );
 
-  passport.serializeUser((user, cb) => {
+  passport.serializeUser((user: { name: string }, cb) => {
     cb(null, user.name);
   });
 
@@ -25,7 +25,7 @@ export function initLocalStrategy() {
 
 export function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) return next();
-  else res.status(403).send('Forbidden');
+  else res.status(403).send("Forbidden");
 }
 
 export function authenticate(username, password) {

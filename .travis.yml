@@ -3,7 +3,7 @@ node_js:
   - node
 addons:
   ssh_known_hosts: schedar.uberspace.de
-
+cache: yarn
 script:
   - npm run build
 before_deploy:

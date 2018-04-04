@@ -1,3 +1,10 @@
+.hello {
+  color: blue;
+}
+.hello > button {
+  margin-left: 10px;
+}
+
 html,
 body {
   padding: 0;
@@ -123,7 +130,7 @@ body {
 .blog-post code,
 input,
 textarea {
-  font-family: 'Ubuntu Monospace', 'Consolas', Courier, monospace;
+  font-family: "Ubuntu Monospace", "Consolas", Courier, monospace;
 }
 
 .blog-post-editor > div {
@@ -184,6 +191,10 @@ header {
   align-items: center;
 }
 
+header a {
+  color: white;
+}
+
 footer > * + * {
   margin-left: 10px;
 }
@@ -197,4 +208,10 @@ button:hover {
 footer > .spacer,
 header > .spacer {
   flex-grow: 1;
+}
+
+.login-form {
+  display: grid;
+  grid-gap: 10px;
+  padding: 10px;
 }

@@ -6,17 +6,22 @@ import * as Auth from './passport';
 import * as session from 'express-session';
 import * as sessionFileStore from 'session-file-store';
 import * as bodyParser from 'body-parser';
+import * as fallback from 'express-history-api-fallback';
+import chalk from 'chalk';
+import { apiRouter } from './api';
+import { printWelcome } from './welcome';
 
 var FileStore = sessionFileStore(session);
 var Config = require('./config');
 var FileUtils = require('./file-utils');
 
 async function run() {
+  printWelcome();
+
   Auth.initLocalStrategy();
 
   var app = express();
   var port = process.env.PORT || 8080;
-  var router = express.Router();
   var config = await Config.load();
 
   app.use(require('morgan')('dev'));
@@ -34,45 +39,58 @@ async function run() {
 
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use('/api', apiRouter());
 
-  router.get('/', (req, res) => {
-    res.send('Welcome to the API for my blog');
-  });
+  let publicDir = config.public;
 
-  router.get('/login', (req, res) => res.redirect('/login.html'));
-
-  router.post(
-    '/login',
-    (req, res, next) => {
-      var options: any = {};
-      if (req.body.failureRedirect)
-        options.failureRedirect = req.body.failureRedirect;
-      passport.authenticate('local', options)(req, res, next);
-    },
-    (req, res) => {
-      if (req.body.successRedirect) res.redirect(req.body.successRedirect);
-      else res.send({ msg: 'Successfully logged in' });
+  if (!fs.existsSync(config.public)) {
+    if (config.public) {
+      console.log(
+        chalk.red(
+          `invalid public dir configured under "public" in config.json (${
+            config.public
+          })`
+        )
+      );
     }
-  );
-
-  router.get('/logout', (req, res) => {
-    req.logout();
-    res.send({ isAuthenticated: req.isAuthenticated() });
-  });
-
-  router.get('/loggedIn', (req, res) => {
-    res.send({ isAuthenticated: req.isAuthenticated() });
-  });
-
-  router.get('/profile', Auth.isAuthenticated, (req, res) => {
-    res.send(req.user);
-  });
-
-  router.use('/posts', require('./posts').router);
-  app.use('/api', router);
+    const fallback = path.resolve(__dirname, '../public');
+    if (config.public) console.log('try to use fallback ' + fallback);
+    if (fs.existsSync(fallback)) {
+      console.log(
+        chalk.yellow(
+          'serving static files from ' +
+            fallback +
+            '.\nIf you want to serve another dir, edit config.json param "public"'
+        )
+      );
+      publicDir = fallback;
+    }
+  }
+  if (fs.existsSync(publicDir)) {
+    publicDir = path.resolve(publicDir);
+    console.log('serving static files from ' + publicDir);
+    app.use(express.static(publicDir));
+    app.use((req, res, next) => {
+      const regex = /\/([^\/]*\.[a-z]{1,4}).*$/;
+      const m = req.url.match(regex);
+      if (m && m.length > 0) {
+        const filePath = path.resolve(publicDir, m[1]);
+        fs.exists(filePath, exists => {
+          if (exists) {
+            res.redirect('/' + m[1]);
+          } else res.status(404).send('not found');
+        });
+      } else next();
+    });
+    app.use(fallback('index.html', { root: publicDir }));
+  } else {
+    console.warn(chalk.red('not providing static files'));
+  }
 
   app.listen(port);
-  console.log(`Blog Service is listening on port ${port} :)`);
+  console.log(
+    `Blog Service is listening on port ${chalk.cyan(port.toString())} :)`
+  );
 }
 
 run();
