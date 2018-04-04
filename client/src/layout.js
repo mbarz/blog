@@ -19,6 +19,16 @@ export function layout() {
     .then(response => response.json())
     .then(data => {
       if (data.isAuthenticated) {
+        const logoutLink = $(`<a href="/api/logout">logout</a>`);
+        logoutLink.click(event => {
+          event.preventDefault();
+          fetch('/api/logout', {
+            credentials: 'same-origin'
+          }).then(() => {
+            route('/');
+          });
+        });
+        spacer.after(logoutLink);
         spacer.after(createLink('/edit', 'editor'));
         spacer.after(createLink('/', 'list'));
       }
@@ -27,10 +37,10 @@ export function layout() {
 }
 
 function createLink(target, text) {
-  const listLink = $(`<a href="${target}">${text}</a>`);
-  listLink.click(event => {
+  const link = $(`<a href="${target}">${text}</a>`);
+  link.click(event => {
     event.preventDefault();
     route(target);
   });
-  return listLink;
+  return link;
 }
