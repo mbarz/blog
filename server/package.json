@@ -5,8 +5,7 @@
   "scripts": {
     "build": "del js && tsc -p .",
     "build:w": "tsc -w -p .",
-    "serve": "nodemon --watch 'ts/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' ts/server.ts",
-    "serve:js": "nodemon --watch 'ts/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'node' ts/server.tj",
+    "serve": "nodemon",
     "start": "node js/server.js"
   },
   "devDependencies": {
