@@ -6,7 +6,6 @@
   "description": "my blog",
   "main": "./server/js/server.js",
   "scripts": {
-    "subinstall": "(cd server && npm install) && (cd client && npm install)",
     "test": "echo 'no testing right now'",
     "serve-ui": "cd client && npm run start",
     "deploy": "bash ./scripts/deploy.sh",
@@ -24,9 +23,6 @@
   },
   "author": "Max-Richard Barz",
   "license": "ISC",
-  "devDependencies": {
-    "browser-sync": "^2.23.6",
-    "http-proxy": "^1.16.2"
-  },
+  "devDependencies": {},
   "dependencies": {}
 }
