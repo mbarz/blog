@@ -93,4 +93,5 @@ async function run() {
   );
 }
 
+console.log('will start');
 run();

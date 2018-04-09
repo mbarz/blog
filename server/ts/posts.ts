@@ -11,12 +11,13 @@ export const router = express.Router();
 const storage = new FileBasedBlogStorage();
 
 router.get('/', async (req, res) => {
-  console.log(req.query);
   storage
     .findAll({ onlyPublic: !req.isAuthenticated() })
     .then(all => {
-      const start = req.query.start || 0;
-      const limit = req.query.limit || all.length - start;
+      const start = req.query.start ? parseInt(req.query.start) : 0;
+      const limit = req.query.limit
+        ? parseInt(req.query.limit)
+        : all.length - start;
       const end = start + limit;
       return all.slice(start, end);
     })

@@ -216,3 +216,13 @@ header > .spacer {
   grid-gap: 10px;
   padding: 10px;
 }
+
+.load-more-button {
+  cursor: pointer;
+  padding: 10px;
+  color: yellowgreen;
+}
+
+.load-more-button:hover {
+  color: yellow;
+}
