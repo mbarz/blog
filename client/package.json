@@ -3,12 +3,10 @@
   "version": "1.0.0",
   "description": "",
   "private": true,
-  "sideEffects": [
-    "*.css"
-  ],
+  "sideEffects": ["*.css"],
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --config webpack.dev.js",
+    "serve": "webpack-dev-server --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js --mode 'production'"
   },
   "author": "",

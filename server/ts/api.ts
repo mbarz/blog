@@ -30,7 +30,12 @@ export function apiRouter() {
   });
 
   router.get('/loggedIn', (req, res) => {
-    res.send({ isAuthenticated: req.isAuthenticated() });
+    try {
+      const isAuthenticated = req.isAuthenticated();
+      res.send({ isAuthenticated });
+    } catch (e) {
+      res.send({ isAuthenticated: false });
+    }
   });
 
   router.get('/profile', Auth.isAuthenticated, (req, res) => {

@@ -7,7 +7,7 @@
   "main": "./server/js/server.js",
   "scripts": {
     "test": "echo 'no testing right now'",
-    "serve-ui": "cd client && npm run start",
+    "serve-ui": "cd client && npm run serve",
     "deploy": "bash ./scripts/deploy.sh",
     "build": "npm run build-api && npm run build-ui",
     "build-api": "cd server && npm run build",

@@ -30,10 +30,13 @@ async function run() {
   app.use(bodyParser.json());
   app.use(
     session({
-      store: new FileStore({}),
+      store: new FileStore({
+        path: './sessions',
+        secret: config.secret
+      }),
       secret: config.secret,
       resave: true,
-      saveUninitialized: true
+      saveUninitialized: false
     })
   );
 
