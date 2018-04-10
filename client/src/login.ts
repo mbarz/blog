@@ -1,5 +1,4 @@
-import $ from "jquery";
-import { layout } from "./layout";
+import { layout } from './layout';
 export function renderLogin() {
   const main = layout();
 

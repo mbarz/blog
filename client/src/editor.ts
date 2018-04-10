@@ -1,7 +1,8 @@
-import $ from 'jquery';
+import * as $ from 'jquery';
 import { layout } from './layout';
+import { Post } from './post';
 
-var id = undefined;
+let id: string | undefined = undefined;
 
 export function renderEditor() {
   const main = layout();
@@ -71,7 +72,7 @@ export function renderEditor() {
 async function load() {
   const selector = $('#post-selector');
   selector.change(() => {
-    const id = selector.val();
+    const id = selector.val() as string;
     if (id) loadPost(id);
     else showCreationForm();
   });
@@ -87,11 +88,11 @@ async function reloadList() {
   selector.html('');
 
   const o = $('<option>');
-  o.val(undefined);
+  o.val('');
   o.text(`new`);
   selector.append(o);
 
-  const list = await fetch('/api/posts', {
+  const list: Post[] = await fetch('/api/posts', {
     credentials: 'same-origin'
   }).then(response => response.json());
   const divs = list
@@ -102,11 +103,11 @@ async function reloadList() {
       return o;
     })
     .forEach(o => selector.append(o));
-  selector.val(id);
+  selector.val(id || '');
   return selector;
 }
 
-function loadPost(id) {
+function loadPost(id: string) {
   return fetch(`/api/posts/${id}`, {
     credentials: 'same-origin'
   })
@@ -120,7 +121,7 @@ function loadPost(id) {
     });
 }
 
-function showPost(post) {
+function showPost(post: Post) {
   reloadList();
   id = post.id;
   history.pushState({}, '', 'edit?id=' + id);
@@ -129,7 +130,8 @@ function showPost(post) {
   $('#post-date').val(post.date);
   $('#post-content').val(post.content);
   $('#post-content').val(post.content);
-  $('#post-public')[0].checked = post.public;
+  const checkbox = $('#post-public')[0] as HTMLInputElement;
+  checkbox.checked = post.public;
 }
 
 function showCreationForm() {
@@ -140,7 +142,8 @@ function showCreationForm() {
   $('#post-date').val(new Date().toISOString().substring(0, 10));
   $('#post-content').val('');
   $('#header').text(`Create new Post`);
-  $('#post-public')[0].checked = true;
+  const checkbox = $('#post-public')[0] as HTMLInputElement;
+  checkbox.checked = true;
 }
 
 function update() {
@@ -181,13 +184,14 @@ function getFormValues() {
   const title = $('#post-title').val();
   const date = $('#post-date').val();
   const content = $('#post-content').val();
-  const isPublic = $('#post-public')[0].checked;
+  const checkbox = $('#post-public')[0] as HTMLInputElement;
+  const isPublic = checkbox.checked;
   return { title, date, content, public: isPublic };
 }
 
 function urlParams() {
   const url = decodeURIComponent(window.location.search.substring(1));
-  const params = {};
+  const params: any = {};
   url
     .split('&')
     .map(item => item.split('='))

@@ -2,5 +2,3 @@ node_modules
 deploy_rsa
 deploy_rsa.pub
 posts
-sessions
-server/js

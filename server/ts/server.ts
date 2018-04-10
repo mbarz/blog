@@ -10,10 +10,9 @@ import * as fallback from 'express-history-api-fallback';
 import chalk from 'chalk';
 import { apiRouter } from './api';
 import { printWelcome } from './welcome';
-
-var FileStore = sessionFileStore(session);
-var Config = require('./config');
-var FileUtils = require('./file-utils');
+import * as Config from './config';
+import * as FileUtils from './file-utils';
+const FileStore = sessionFileStore(session);
 
 async function run() {
   printWelcome();
@@ -30,7 +29,7 @@ async function run() {
   app.use(bodyParser.json());
   app.use(
     session({
-      store: new FileStore({}),
+      store: new FileStore({ path: './sessions', secret: config.secret }),
       secret: config.secret,
       resave: true,
       saveUninitialized: true

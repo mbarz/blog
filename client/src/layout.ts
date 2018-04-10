@@ -1,5 +1,5 @@
-import $ from 'jquery';
-import { route } from './renderer';
+import * as $ from 'jquery';
+import { Router } from './router';
 
 export function layout() {
   if ($('#main').length) return $('#main');
@@ -9,7 +9,7 @@ export function layout() {
 
   const header = $('<header>');
   const h1 = $('<h1>muxes dev blog</h1>');
-  h1.click(() => route('/'));
+  h1.click(() => Router.route('/'));
   header.append(h1);
   const spacer = $(`<div class="spacer"></div>`);
   header.append(spacer);
@@ -29,7 +29,7 @@ export function layout() {
           fetch('/api/logout', {
             credentials: 'same-origin'
           }).then(() => {
-            route('/');
+            Router.route('/');
           });
         });
         spacer.after(logoutLink);
@@ -43,11 +43,11 @@ export function layout() {
   return main;
 }
 
-function createLink(target, text) {
+function createLink(target: string, text: string) {
   const link = $(`<a href="${target}">${text}</a>`);
   link.click(event => {
     event.preventDefault();
-    route(target);
+    Router.route(target);
   });
   return link;
 }
