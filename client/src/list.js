@@ -14,9 +14,13 @@ class Loader {
   }
 
   loadPosts({ start, limit } = {}) {
-    const url = new URL('api/posts', location.origin);
-    if (limit) url.searchParams.append('limit', limit);
-    if (start) url.searchParams.append('start', start);
+    let url = 'api/posts';
+    console.log(url);
+    const params = [];
+    if (limit) params.push('limit=' + limit);
+    if (start) params.push('start=' + start);
+    if (params.length) url += '?' + params.join('&');
+    console.log(url);
     return fetch(url, {
       credentials: 'same-origin'
     }).then(response => {
