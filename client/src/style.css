@@ -18,6 +18,13 @@ body {
   color: white;
   font-family: sans-serif;
   font-size: 11pt;
+  background: url('green_cloud_1080.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#main {
+  background: black;
 }
 
 #main > header {
