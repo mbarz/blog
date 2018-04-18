@@ -1,10 +1,10 @@
 import React from 'react';
 import { Header } from './header';
+import { PostList } from './post-list';
 
 export const Layout = () => (
   <div id="main">
     <Header />
-    <div className="posts" />
-    <div className="load-more-button">Mehr laden</div>
+    <PostList />
   </div>
 );

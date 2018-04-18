@@ -16,6 +16,17 @@ module.exports = {
           fallback: 'style-loader',
           use: 'css-loader'
         })
+      },
+      {
+        test: /\.(png|jpg|gif)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              // name: '[path][name].[ext]'
+            }
+          }
+        ]
       }
     ]
   },
@@ -33,6 +44,10 @@ module.exports = {
   ],
   devServer: {
     contentBase: './dist',
-    hot: true
+    port: 9000,
+    hot: true,
+    proxy: {
+      '/api': 'http://localhost:8080'
+    }
   }
 };
