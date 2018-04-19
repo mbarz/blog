@@ -214,6 +214,10 @@ button:hover {
   background: rgb(50, 80, 50);
 }
 
+.logout-button {
+  cursor: pointer;
+}
+
 .blog-post-editor > div > input,
 .blog-post-editor > div > textarea,
 footer > .spacer,

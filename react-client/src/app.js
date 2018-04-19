@@ -3,6 +3,7 @@ import React from 'react';
 // Redux
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
+import ReduxThunk from 'redux-thunk';
 
 // Router
 import createHistory from 'history/createBrowserHistory';
@@ -14,17 +15,18 @@ import {
   push
 } from 'react-router-redux';
 
-import { Header } from './components/header';
+import Header from './components/header';
 import { PostList } from './components/post-list';
 import { Editor } from './components/editor';
 import { Login } from './components/login';
 import { NotFound } from './components/not-found';
 
+import { authReducer } from './reducers';
+
 const history = createHistory();
-const middleware = routerMiddleware(history);
 const store = createStore(
-  combineReducers({ router: routerReducer }),
-  applyMiddleware(middleware)
+  combineReducers({ router: routerReducer, loggedIn: authReducer }),
+  applyMiddleware(ReduxThunk, routerMiddleware(history))
 );
 
 export const App = () => (
