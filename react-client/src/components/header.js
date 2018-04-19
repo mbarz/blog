@@ -13,7 +13,7 @@ const EditButton = () => (
 
 const LoginButton = () => (
   <Link to="/login">
-    <i className="fa fa-sign-in-alt" />
+    <i className="fa fa-unlock" />
   </Link>
 );
 
@@ -36,7 +36,7 @@ export class Header extends React.Component {
         {!loggedIn ? <LoginButton /> : null}
         {loggedIn ? (
           <a onClick={() => this.logout()} className="logout-button">
-            <i className="fa fa-sign-out-alt" />
+            <i className="fa fa-lock" />
           </a>
         ) : null}
         <img src="https://travis-ci.org/mbarz/blog.svg?branch=master" />
