@@ -1,6 +1,6 @@
 import React from 'react';
 import marked from 'marked';
-import * as Prism from './lib/prism';
+import * as Prism from './../lib/prism';
 
 export class Post extends React.Component {
   constructor(props) {

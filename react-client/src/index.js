@@ -1,8 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { App } from './app';
+
 import './style.css';
 import './prism.css';
-import { Layout } from './layout';
 
-ReactDOM.render(<Layout />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));
 module.hot.accept();
