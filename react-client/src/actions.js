@@ -1,3 +1,5 @@
+import { push } from 'react-router-redux';
+
 export const RECEIVE_LOGIN_STATE = 'RECEIVE_LOGIN_STATE';
 export const SEND_LOGIN = 'SEND_LOGIN';
 export const RECEIVE_LOGIN_RESPONSE = 'RECEIVE_LOGIN_RESPONSE';
@@ -48,6 +50,7 @@ export function login(username, password) {
       console.log(response);
       if (response.ok) {
         dispatch(receiveLoginResponse());
+        dispatch(push('/'));
       } else {
         dispatch(receiveLoginResponse(response.statusText));
       }
