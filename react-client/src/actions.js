@@ -62,6 +62,9 @@ export function logout() {
   return function(dispatch) {
     return fetch('api/logout', { credentials: 'same-origin' })
       .then(response => response.json())
-      .then(data => dispatch(receiveLoginState(false)));
+      .then(data => {
+        dispatch(receiveLoginState(false));
+        dispatch(push('/'));
+      });
   };
 }
