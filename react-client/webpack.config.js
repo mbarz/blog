@@ -27,6 +27,17 @@ module.exports = {
             }
           }
         ]
+      },
+      {
+        test: /src\/favicon\.(ico)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: 'favicon.ico'
+            }
+          }
+        ]
       }
     ]
   },
