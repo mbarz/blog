@@ -23,7 +23,7 @@ export class Header extends React.Component {
   }
 
   render() {
-    const { loggedIn } = this.props;
+    const { loggedIn } = this.props.auth;
 
     return (
       <header>
@@ -51,7 +51,7 @@ export class Header extends React.Component {
 
 function mapStateToProps(state) {
   return {
-    loggedIn: state.loggedIn
+    auth: state.auth
   };
 }
 

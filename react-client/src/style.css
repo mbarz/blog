@@ -78,12 +78,12 @@ body {
 }
 
 .message {
-  margin: 20px;
+  margin-top: 20px;
   padding: 20px;
   background: rgb(150, 255, 150);
 }
 .error-message {
-  background: rgb(255, 150, 150);
+  background: rgb(155, 50, 50);
 }
 
 .blog-post {
@@ -228,7 +228,7 @@ header > .spacer {
 .login-form {
   display: grid;
   grid-gap: 10px;
-  padding: 10px;
+  padding: 20px;
 }
 
 .load-more-button {

@@ -18,14 +18,14 @@ import {
 import Header from './components/header';
 import { PostList } from './components/post-list';
 import { Editor } from './components/editor';
-import { Login } from './components/login';
+import Login from './components/login';
 import { NotFound } from './components/not-found';
 
 import { authReducer } from './reducers';
 
 const history = createHistory();
 const store = createStore(
-  combineReducers({ router: routerReducer, loggedIn: authReducer }),
+  combineReducers({ router: routerReducer, auth: authReducer }),
   applyMiddleware(ReduxThunk, routerMiddleware(history))
 );
 
