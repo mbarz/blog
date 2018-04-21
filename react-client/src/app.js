@@ -17,9 +17,10 @@ import {
 
 import Header from './components/header';
 import { PostList } from './components/post-list';
-import { Editor } from './components/editor';
+import Editor from './components/editor';
 import Login from './components/login';
 import { NotFound } from './components/not-found';
+import requireAuth from './components/auth';
 
 import { authReducer } from './reducers';
 
@@ -38,6 +39,7 @@ export const App = () => (
           <Route exact path="/" component={PostList} />
           <Route path="/login" component={Login} />
           <Route path="/edit" component={Editor} />
+          <Route component={requireAuth(Editor)} path="/e" />
           <Route component={NotFound} />
         </Switch>
       </div>

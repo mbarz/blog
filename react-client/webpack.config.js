@@ -29,7 +29,7 @@ module.exports = {
         ]
       },
       {
-        test: /src\/favicon\.(ico)$/,
+        test: /favicon\.(ico)$/,
         use: [
           {
             loader: 'file-loader',
