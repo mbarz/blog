@@ -26,6 +26,8 @@ body {
 
 #main {
   background: black;
+  display: flex;
+  flex-direction: column;
 }
 
 #main > header {

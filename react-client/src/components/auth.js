@@ -10,7 +10,6 @@ export default function requireAuth(Component) {
       this.checkAuth();
     }
     checkAuth() {
-      console.log('checking auth', this.props);
       if (!this.props.isLoggedIn) {
         const location = this.props.location;
         const redirect = location.pathname + location.search;
@@ -27,8 +26,6 @@ export default function requireAuth(Component) {
       );
     }
   }
-  console.log('build component');
-  console.log('authenticated component');
   const mapStateToProps = state => ({ isLoggedIn: state.auth.loggedIn });
   const comopnent = connect(mapStateToProps)(AuthenticatedComponent);
   return withRouter(comopnent);
