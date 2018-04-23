@@ -16,17 +16,21 @@ import {
 } from 'react-router-redux';
 
 import Header from './components/header';
-import { PostList } from './components/post-list';
+import PostList from './components/post-list';
 import Editor from './components/editor';
 import Login from './components/login';
 import { NotFound } from './components/not-found';
 import requireAuth from './components/auth';
 
-import { authReducer } from './reducers';
+import { authReducer, postReducer } from './reducers';
 
 const history = createHistory();
 const store = createStore(
-  combineReducers({ router: routerReducer, auth: authReducer }),
+  combineReducers({
+    router: routerReducer,
+    auth: authReducer,
+    posts: postReducer
+  }),
   applyMiddleware(ReduxThunk, routerMiddleware(history))
 );
 
