@@ -10,6 +10,7 @@
     "deploy": "bash ./scripts/deploy.sh",
     "build": "npm run build-api && npm run build-ui",
     "build-api": "cd server && npm run build",
+    "build-ui": "cd react-client && npm run build",
     "serve-api": "cd server && npm run serve",
     "serve-ui": "cd react-client && npm run start",
     "start": "cd server && npm start",
