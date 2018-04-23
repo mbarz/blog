@@ -46,7 +46,7 @@ async function run() {
   app.use(
     '/api',
     cors({
-      origin: 'http://localhost:9000',
+      origin: true,
       credentials: true
     })
   );
