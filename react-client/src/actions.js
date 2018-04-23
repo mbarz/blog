@@ -15,6 +15,8 @@ export const RECEIVE_ERROR = 'RECEIVE_ERROR';
 import store from './store';
 import config from './config';
 
+const credentials = 'include';
+
 function throwIfNotOk(response) {
   if (!response.ok) throw Error(`${response.status} - ${response.statusText}`);
   return response;
@@ -44,7 +46,7 @@ export function receiveLoginResponse(error) {
 export function checkLogin() {
   return function(dispatch) {
     return fetch(`${config.api}/loggedin`, {
-      credentials: 'same-origin'
+      credentials: credentials
     })
       .then(response => response.json())
       .then(data => {
@@ -63,12 +65,12 @@ export function login(username, password) {
       headers: new Headers({
         'Content-Type': 'application/json'
       }),
-      credentials: 'same-origin'
+      credentials: credentials
     }).then(response => {
       console.log(response);
       if (response.ok) {
         dispatch(receiveLoginResponse());
-        dispatch(push('/'));
+        dispatch(push('/edit'));
       } else {
         dispatch(receiveLoginResponse(response.statusText));
       }
@@ -84,7 +86,7 @@ function startSave() {
 
 export function logout() {
   return function(dispatch) {
-    return fetch(`${config.api}logout`, { credentials: 'same-origin' })
+    return fetch(`${config.api}logout`, { credentials: credentials })
       .then(response => response.json())
       .then(data => {
         dispatch(receiveLoginState(false));
@@ -107,7 +109,7 @@ export function loadPosts({ start, limit } = {}) {
     if (params.length) url += '?' + params.join('&');
 
     return fetch(url, {
-      credentials: 'same-origin'
+      credentials: credentials
     })
       .then(throwIfNotOk)
       .then(response => response.json())
@@ -152,7 +154,7 @@ export function createPost(post) {
 
     return fetch(url, {
       method: 'POST',
-      credentials: 'same-origin',
+      credentials: credentials,
       body: JSON.stringify(post),
       headers: new Headers({ 'Content-Type': 'application/json' })
     })
@@ -170,7 +172,7 @@ export function updatePost(post) {
 
     return fetch(url, {
       method: 'PUT',
-      credentials: 'same-origin',
+      credentials: credentials,
       body: JSON.stringify(post),
       headers: new Headers({ 'Content-Type': 'application/json' })
     })
@@ -187,7 +189,7 @@ export function deletePost(post) {
     let url = `${config.api}/posts/${post.id}`;
     return fetch(url, {
       method: 'DELETE',
-      credentials: 'same-origin'
+      credentials: credentials
     })
       .then(throwIfNotOk)
       .then(response => response.json())

@@ -1,5 +1,6 @@
 import * as bodyParser from 'body-parser';
 import chalk from 'chalk';
+import * as cors from 'cors';
 import * as express from 'express';
 import * as fallback from 'express-history-api-fallback';
 import * as session from 'express-session';
@@ -42,16 +43,13 @@ async function run() {
 
   app.use(passport.initialize());
   app.use(passport.session());
-  app.use('/api', (req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header(
-      'Access-Control-Allow-Headers',
-      'Origin, X-Requested-With, Content-Type, Accept'
-    );
-    if ('OPTIONS' === req.method) {
-      res.send(200);
-    } else next();
-  });
+  app.use(
+    '/api',
+    cors({
+      origin: 'http://localhost:9000',
+      credentials: true
+    })
+  );
   app.use('/api', apiRouter());
 
   let publicDir = config.public;
