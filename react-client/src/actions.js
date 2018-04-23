@@ -150,7 +150,7 @@ export function createPost(post) {
   return function(dispatch) {
     dispatch(startSave());
 
-    let url = `${config.api}posts`;
+    let url = `${config.api}/posts`;
 
     return fetch(url, {
       method: 'POST',

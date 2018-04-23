@@ -1,18 +1,17 @@
 {
   "name": "muxe-de-blog",
   "private": true,
-  "workspaces": ["server", "client", "react-client"],
+  "workspaces": ["server", "react-client"],
   "version": "1.0.0",
   "description": "my blog",
   "main": "./server/js/server.js",
   "scripts": {
     "test": "echo 'no testing right now'",
-    "serve-ui": "cd client && npm run serve",
     "deploy": "bash ./scripts/deploy.sh",
     "build": "npm run build-api && npm run build-ui",
     "build-api": "cd server && npm run build",
-    "build-ui": "cd client && npm run build",
     "serve-api": "cd server && npm run serve",
+    "serve-ui": "cd react-client && npm run start",
     "start": "cd server && npm start",
     "pull-posts": "bash ./scripts/pull-posts.sh",
     "push-posts": "bash ./scripts/push-posts.sh"

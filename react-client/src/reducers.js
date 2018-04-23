@@ -44,6 +44,7 @@ export function postReducer(state = { posts: [], loading: false }, action) {
         posts: mergePosts(state.posts, action.posts)
       };
     case RECEIVE_POST:
+      console.log({ received: action.post });
       return {
         ...state,
         loading: false,
@@ -65,11 +66,15 @@ export function postReducer(state = { posts: [], loading: false }, action) {
 function mergePosts(current, updated) {
   const result = [...current];
   for (const post of updated) replaceOrAdd(result, post);
+  result.sort((a, b) => b.id - a.id);
   return result;
 }
 
 function replaceOrAdd(posts, post) {
   const index = posts.findIndex(item => item.id === post.id);
   if (index >= 0) posts.splice(index, 1, post);
-  else posts.push(post);
+  else {
+    console.log('pushing post');
+    posts.push(post);
+  }
 }

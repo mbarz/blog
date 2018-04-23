@@ -40,12 +40,15 @@ class Editor extends React.Component {
 
   save() {
     const { savePost } = this.props;
-    savePost(this.state.post);
+    const id = this.state.post.id;
+    savePost(this.state.post).then(result =>
+      this.setState({ post: result.post })
+    );
   }
 
   delete() {
     const { deletePost } = this.props;
-    deletePost(this.state.post);
+    deletePost(this.state.post).then(this.setState(this.initialState()));
   }
 
   updatePostProperty(name, value) {
@@ -63,9 +66,15 @@ class Editor extends React.Component {
           <div className="spacer" />
           <div>
             <select onChange={e => this.onSelection(e)}>
-              <option value={'new'}>Create New</option>
+              <option value={'new'} selected={!this.state.post.id}>
+                Create New
+              </option>
               {posts.map(post => (
-                <option key={post.id} value={post.id}>
+                <option
+                  key={post.id}
+                  value={post.id}
+                  selected={this.state.post.id === post.id}
+                >
                   {post.id} - {post.title}
                 </option>
               ))}
