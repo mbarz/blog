@@ -5,11 +5,11 @@ import { Route, Switch } from 'react-router';
 import { ConnectedRouter, routerMiddleware, push } from 'react-router-redux';
 
 import Header from './layout/header';
-import PostList from './posts/post-list';
 import Editor from './editor/editor';
 import Login from './auth/login';
-import { NotFound } from './not-found/not-found';
+import NotFound from './not-found/not-found';
 import requireAuth from './auth/auth';
+import PostList from './posts/post-list';
 
 import store from './store';
 import { history } from './store';
