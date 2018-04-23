@@ -27,7 +27,9 @@ export class Header extends React.Component {
 
     return (
       <header>
-        <h1>muxes dev blog</h1>
+        <Link to="/">
+          <h1>muxe.de | devblog</h1>
+        </Link>
         <div className="spacer" />
         <Link to="/">
           <i className="fa fa-list" />

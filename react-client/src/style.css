@@ -39,10 +39,15 @@ body {
   margin-left: 10px;
 }
 
-#main > header > h1 {
+#main > header a {
+  text-decoration: none;
+}
+
+#main > header h1 {
   margin: 0;
   font-size: 13pt;
   cursor: pointer;
+  text-decoration: none;
 }
 
 ::-webkit-scrollbar {

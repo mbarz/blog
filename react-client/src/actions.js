@@ -12,6 +12,9 @@ export const RECEIVE_POST = 'RECEIVE_POST';
 export const RECEIVE_POST_DELETION = 'RECEIVE_POST_DELETION';
 export const RECEIVE_ERROR = 'RECEIVE_ERROR';
 
+import store from './store';
+import config from './config';
+
 function throwIfNotOk(response) {
   if (!response.ok) throw Error(`${response.status} - ${response.statusText}`);
   return response;
@@ -40,7 +43,9 @@ export function receiveLoginResponse(error) {
 
 export function checkLogin() {
   return function(dispatch) {
-    return fetch('api/loggedin', { credentials: 'same-origin' })
+    return fetch(`${config.api}/loggedin`, {
+      credentials: 'same-origin'
+    })
       .then(response => response.json())
       .then(data => {
         return data;
@@ -52,7 +57,7 @@ export function checkLogin() {
 export function login(username, password) {
   return function(dispatch) {
     dispatch(startLogin());
-    return fetch('api/login', {
+    return fetch(`${config.api}/login`, {
       method: 'POST',
       body: JSON.stringify({ username, password }),
       headers: new Headers({
@@ -79,7 +84,7 @@ function startSave() {
 
 export function logout() {
   return function(dispatch) {
-    return fetch('api/logout', { credentials: 'same-origin' })
+    return fetch(`${config.api}logout`, { credentials: 'same-origin' })
       .then(response => response.json())
       .then(data => {
         dispatch(receiveLoginState(false));
@@ -95,7 +100,7 @@ export function loadPosts({ start, limit } = {}) {
       clean: !start
     }));
 
-    let url = 'api/posts';
+    let url = `${config.api}/posts`;
     const params = [];
     if (limit) params.push('limit=' + limit);
     if (start) params.push('start=' + start);
@@ -143,7 +148,7 @@ export function createPost(post) {
   return function(dispatch) {
     dispatch(startSave());
 
-    let url = 'api/posts';
+    let url = `${config.api}posts`;
 
     return fetch(url, {
       method: 'POST',
@@ -161,7 +166,7 @@ export function updatePost(post) {
   return function(dispatch) {
     dispatch(startSave());
 
-    let url = `api/posts/${post.id}`;
+    let url = `${config.api}/posts/${post.id}`;
 
     return fetch(url, {
       method: 'PUT',
@@ -179,7 +184,7 @@ export function updatePost(post) {
 export function deletePost(post) {
   return function(dispatch) {
     dispatch(startPostDelete());
-    let url = `api/posts/${post.id}`;
+    let url = `${config.api}/posts/${post.id}`;
     return fetch(url, {
       method: 'DELETE',
       credentials: 'same-origin'

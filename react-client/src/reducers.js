@@ -15,11 +15,11 @@ import { merge } from 'rxjs/operator/merge';
 export function authReducer(state = { loggedIn: false }, action) {
   switch (action.type) {
     case RECEIVE_LOGIN_STATE:
-      return { loggedIn: action.loggedIn };
+      return { ...state, loggedIn: action.loggedIn };
     case SEND_LOGIN:
-      return { loginError: null };
+      return { ...state, loginError: null };
     case RECEIVE_LOGIN_RESPONSE:
-      return { loggedIn: action.loggedIn, loginError: action.error };
+      return { ...state, loggedIn: action.loggedIn, loginError: action.error };
     default:
       return state;
   }
@@ -28,22 +28,34 @@ export function authReducer(state = { loggedIn: false }, action) {
 export function postReducer(state = { posts: [], loading: false }, action) {
   switch (action.type) {
     case SAVE_POST:
-      return { loading: true, posts: state.posts };
+      return { ...state, loading: true };
     case DELETE_POST:
-      return { loading: true, posts: state.posts };
+      return { ...state, loading: true };
     case LOAD_POSTS:
-      return { loading: true, posts: action.clean ? [] : state.posts };
+      return {
+        ...state,
+        loading: true,
+        posts: action.clean ? [] : state.posts
+      };
     case RECEIVE_POSTS:
-      return { loading: false, posts: mergePosts(state.posts, action.posts) };
+      return {
+        ...state,
+        loading: false,
+        posts: mergePosts(state.posts, action.posts)
+      };
     case RECEIVE_POST:
-      return { loading: false, posts: mergePosts(state.posts, [action.post]) };
+      return {
+        ...state,
+        loading: false,
+        posts: mergePosts(state.posts, [action.post])
+      };
     case RECEIVE_POST_DELETION:
       return {
+        ...state,
         loading: false,
         posts: state.posts.filter(p => p.id !== action.post.id)
       };
     case RECEIVE_ERROR:
-      console.log(action.error);
       return { ...state, loading: false, error: action.error.message };
     default:
       return state;

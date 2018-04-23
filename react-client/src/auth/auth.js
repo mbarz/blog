@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 
-import Editor from './editor';
-
 export default function requireAuth(Component) {
   class AuthenticatedComponent extends React.Component {
     componentWillMount() {

@@ -1,14 +1,14 @@
-import * as express from 'express';
-import * as fs from 'fs';
-import * as path from 'path';
-import * as passport from 'passport';
-import * as Auth from './passport';
-import * as session from 'express-session';
-import * as sessionFileStore from 'session-file-store';
 import * as bodyParser from 'body-parser';
-import * as fallback from 'express-history-api-fallback';
 import chalk from 'chalk';
+import * as express from 'express';
+import * as fallback from 'express-history-api-fallback';
+import * as session from 'express-session';
+import * as fs from 'fs';
+import * as passport from 'passport';
+import * as path from 'path';
+import * as sessionFileStore from 'session-file-store';
 import { apiRouter } from './api';
+import * as Auth from './passport';
 import { printWelcome } from './welcome';
 
 var FileStore = sessionFileStore(session);
@@ -42,6 +42,16 @@ async function run() {
 
   app.use(passport.initialize());
   app.use(passport.session());
+  app.use('/api', (req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header(
+      'Access-Control-Allow-Headers',
+      'Origin, X-Requested-With, Content-Type, Accept'
+    );
+    if ('OPTIONS' === req.method) {
+      res.send(200);
+    } else next();
+  });
   app.use('/api', apiRouter());
 
   let publicDir = config.public;

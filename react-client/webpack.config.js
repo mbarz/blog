@@ -21,10 +21,7 @@ module.exports = {
         test: /\.(png|jpg|gif)$/,
         use: [
           {
-            loader: 'file-loader',
-            options: {
-              // name: '[path][name].[ext]'
-            }
+            loader: 'file-loader'
           }
         ]
       },
@@ -52,15 +49,14 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('styles.css'),
     new webpack.HotModuleReplacementPlugin()
+    // new webpack.DefinePlugin({
+    //   'process.env.NODE_ENV': JSON.stringify('production')
+    // })
   ],
   devServer: {
     contentBase: './dist',
     port: 9000,
     hot: true,
-    proxy: {
-      '/api': 'http://localhost:8080'
-      // '/api': 'http://blog.muxe.de'
-    },
     historyApiFallback: true
   }
 };
