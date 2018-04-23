@@ -80,7 +80,6 @@ body {
 }
 
 .message {
-  margin-top: 20px;
   padding: 20px;
   background: rgb(150, 255, 150);
 }
@@ -198,6 +197,14 @@ button {
   padding: 5px 10px;
   color: white;
 }
+button:hover {
+  background: rgb(50, 80, 50);
+}
+button:disabled {
+  cursor: auto;
+  background: rgb(50, 60, 60);
+  color: rgb(80, 90, 90);
+}
 
 header {
   display: flex;
@@ -210,10 +217,6 @@ header a {
 
 footer > * + * {
   margin-left: 10px;
-}
-
-button:hover {
-  background: rgb(50, 80, 50);
 }
 
 .logout-button {

@@ -5,9 +5,17 @@ export const SEND_LOGIN = 'SEND_LOGIN';
 export const RECEIVE_LOGIN_RESPONSE = 'RECEIVE_LOGIN_RESPONSE';
 
 export const LOAD_POSTS = 'LOAD_POSTS';
+export const DELETE_POST = 'LOAD_POSTS';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
 export const SAVE_POST = 'SAVE_POST';
 export const RECEIVE_POST = 'RECEIVE_POST';
+export const RECEIVE_POST_DELETION = 'RECEIVE_POST_DELETION';
+export const RECEIVE_ERROR = 'RECEIVE_ERROR';
+
+function throwIfNotOk(response) {
+  if (!response.ok) throw Error(`${response.status} - ${response.statusText}`);
+  return response;
+}
 
 export function receiveLoginState(loggedIn) {
   return {
@@ -63,6 +71,12 @@ export function login(username, password) {
   };
 }
 
+function startSave() {
+  return {
+    type: SAVE_POST
+  };
+}
+
 export function logout() {
   return function(dispatch) {
     return fetch('api/logout', { credentials: 'same-origin' })
@@ -74,7 +88,7 @@ export function logout() {
   };
 }
 
-export function loadPosts({ start, limit }) {
+export function loadPosts({ start, limit } = {}) {
   return function(dispatch) {
     dispatch(() => ({
       type: LOAD_POSTS,
@@ -90,8 +104,10 @@ export function loadPosts({ start, limit }) {
     return fetch(url, {
       credentials: 'same-origin'
     })
+      .then(throwIfNotOk)
       .then(response => response.json())
-      .then(data => dispatch(receivePosts(data)));
+      .then(data => dispatch(receivePosts(data)))
+      .catch(error => dispatch(receiveError(error)));
   };
 }
 export function receivePosts(posts) {
@@ -100,15 +116,32 @@ export function receivePosts(posts) {
     posts: posts
   };
 }
+export function receiveError(error) {
+  return {
+    type: RECEIVE_ERROR,
+    error: error
+  };
+}
+
+function receivePostDeletion(post) {
+  return {
+    type: RECEIVE_POST_DELETION,
+    post: post
+  };
+}
+
+function startPostDelete() {
+  return {
+    type: DELETE_POST
+  };
+}
 export function savePost(post) {
   if (post.id) return updatePost(post);
   else return createPost(post);
 }
 export function createPost(post) {
   return function(dispatch) {
-    dispatch(() => ({
-      type: SAVE_POST
-    }));
+    dispatch(startSave());
 
     let url = 'api/posts';
 
@@ -118,15 +151,15 @@ export function createPost(post) {
       body: JSON.stringify(post),
       headers: new Headers({ 'Content-Type': 'application/json' })
     })
+      .then(throwIfNotOk)
       .then(response => response.json())
-      .then(post => dispatch(receivePost(post)));
+      .then(data => dispatch(receivePost(data)))
+      .catch(error => dispatch(receiveError(error)));
   };
 }
 export function updatePost(post) {
   return function(dispatch) {
-    dispatch(() => ({
-      type: SAVE_POST
-    }));
+    dispatch(startSave());
 
     let url = `api/posts/${post.id}`;
 
@@ -136,14 +169,31 @@ export function updatePost(post) {
       body: JSON.stringify(post),
       headers: new Headers({ 'Content-Type': 'application/json' })
     })
+      .then(throwIfNotOk)
       .then(response => response.json())
-      .then(post => dispatch(receivePost(post)));
+      .then(post => dispatch(receivePost(post)))
+      .catch(error => dispatch(receiveError(error)));
   };
 }
 
-export function receivePost() {
+export function deletePost(post) {
+  return function(dispatch) {
+    dispatch(startPostDelete());
+    let url = `api/posts/${post.id}`;
+    return fetch(url, {
+      method: 'DELETE',
+      credentials: 'same-origin'
+    })
+      .then(throwIfNotOk)
+      .then(response => response.json())
+      .then(() => dispatch(receivePostDeletion(post)))
+      .catch(error => dispatch(receiveError(error)));
+  };
+}
+
+export function receivePost(post) {
   return {
     type: RECEIVE_POST,
-    post: post
+    post
   };
 }
