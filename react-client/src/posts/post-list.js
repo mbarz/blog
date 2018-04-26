@@ -2,7 +2,6 @@ import React from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Post } from './post';
-import * as Prism from './../lib/prism';
 import * as Actions from './../actions';
 
 class PostList extends React.Component {
@@ -10,14 +9,9 @@ class PostList extends React.Component {
     super();
   }
 
-  componentDidUpdate() {
-    Prism.highlightAll();
-  }
-
   componentDidMount() {
     const { loadPosts, posts } = this.props;
-    if (posts.length > 0) Prism.highlightAll();
-    else loadPosts({ start: 0, limit: 5 });
+    if (!posts || posts.length == 0) loadPosts({ start: 0, limit: 5 });
   }
 
   loadNextPosts(n = 5) {

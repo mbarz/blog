@@ -25,7 +25,10 @@ export function authReducer(state = { loggedIn: false }, action) {
   }
 }
 
-export function postReducer(state = { posts: [], loading: false }, action) {
+export function postReducer(
+  state = { posts: [], loading: false, error: undefined },
+  action
+) {
   switch (action.type) {
     case SAVE_POST:
       return { ...state, loading: true };
