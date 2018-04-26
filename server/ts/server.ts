@@ -8,6 +8,7 @@ import * as fs from 'fs';
 import * as passport from 'passport';
 import * as path from 'path';
 import * as sessionFileStore from 'session-file-store';
+import * as compression from 'compression';
 import { apiRouter } from './api';
 import * as Auth from './passport';
 import { printWelcome } from './welcome';
@@ -29,6 +30,7 @@ async function run() {
   app.use(require('cookie-parser')());
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
+  app.use(compression());
   app.use(
     session({
       store: new FileStore({
