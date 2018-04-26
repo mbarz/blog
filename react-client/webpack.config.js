@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
-  entry: ['./src/index.js', 'react-hot-loader/patch'],
+  entry: ['./src/index.jsx', 'react-hot-loader/patch'],
   devtool: 'source-map',
   module: {
     rules: [
