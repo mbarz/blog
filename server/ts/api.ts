@@ -30,6 +30,7 @@ export function apiRouter() {
   });
 
   router.get('/loggedIn', (req, res) => {
+    console.log({ auth: req.isAuthenticated() });
     try {
       const isAuthenticated = req.isAuthenticated();
       res.send({ isAuthenticated });
