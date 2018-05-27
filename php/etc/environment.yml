@@ -1,0 +1,3 @@
+WEB_DOCUMENT_ROOT=/app/
+WEB_DOCUMENT_INDEX=index.php
+CLI_SCRIPT=php /app/index.php
