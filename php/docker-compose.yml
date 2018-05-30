@@ -8,8 +8,7 @@ services:
       - '8080:80'
       - '8443:443'
     volumes:
-      - $PWD/app/:/app/
-      # - 'c:/dev/blog/php/app/:/app/'
+      - ./app/:/app/
       - './:/docker'
     cap_add:
       - SYS_PTRACE
