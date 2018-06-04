@@ -25,7 +25,7 @@ services:
     image: mariadb:latest
     container_name: blog-db
     volumes: 
-      - dbvolume:/var/lib/mysql
+      - blogdb:/var/lib/mysql
     environment: 
       - MYSQL_ROOT_PASSWORD=letmein
   phpMyAdmin:
@@ -35,9 +35,7 @@ services:
       - 8090:80
     depends_on: 
       - db
-volumes:
-  dbvolume:
-    external:
-      name: blog-db
+volumes: 
+  blogdb:
 
 
