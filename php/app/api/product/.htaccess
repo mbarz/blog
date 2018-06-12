@@ -1,0 +1,8 @@
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} GET
+RewriteRule ^([0-9]+)$ endpoints/read_one.php?id=$1 [L]
+RewriteRule ^$ endpoints/read.php [L]
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^(.*)$ endpoints/create.php [L]
+RewriteCond %{REQUEST_METHOD} DELETE
+RewriteRule ^([0-9]+)$ endpoints/delete.php?id=$1 [L]
