@@ -1,0 +1,7 @@
+RewriteEngine On
+RewriteCond %{REQUEST_METHOD} GET
+RewriteRule ^login$ login_form.php [L]
+RewriteCond %{REQUEST_METHOD} POST
+RewriteRule ^login$ login.php [L]
+RewriteCond %{REQUEST_METHOD} GET
+RewriteRule ^logout$ logout.php [L]
