@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Firebase blog</title>
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase-database.js"></script>
+  <style>
+    #error-message {
+      background: rgb(150, 0, 0);
+      color: white;
+      padding: 10px;
+      margin-top: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1 id="bigOne"></h1>
+
+  <div class="login-container">
+
+    <input type="email" id="inputEmail" placeholder="email">
+    <input type="password" id="inputPassword" placeholder="password">
+    <button id="btnLogIn">Log In</button>
+    <button id="btnSignUp">Sign Up</button>
+    <button id="btnLogOut">Log out</button>
+    <br />
+    <br />
+    <button id="btnFacebookLogIn">Facebook Login</button>
+    <div id="error-message">err</div>
+  </div>
+
+  <pre id="user-container"></pre>
+
+  <script src="./app.js">
+
+  </script>
+</body>
+
+</html>
